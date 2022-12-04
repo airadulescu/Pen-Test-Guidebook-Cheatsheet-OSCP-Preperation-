@@ -1,6 +1,6 @@
 # Zero-to-Hero-Pen-Testing-Notes-
 
-1.Always maunally ennumerate control+u 
-2.gobuster/dirb   
-3.nikto  
-4.If a directory is find, re run with the directory to see if there is further directories  
+1.Always maunally ennumerate control+u\
+2.gobuster/dirb. If you find some directory and stuck  make sure to run gobuster again with the new directory\   
+3.nikto\  
+  
