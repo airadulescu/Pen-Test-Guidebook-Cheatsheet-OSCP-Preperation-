@@ -1,7 +1,7 @@
 # Zero-to-Hero-Pen-Testing-Notes-
 
 1.Always maunally ennumerate and check the source code control+u/ Check /robots.txt /sitemap.xml\
-2.gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt\
+2.gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt\    -b (for bad servercode)
 2.5 wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --sc 200 http://$IP/FUZZ
 3. nikto -h $IP 
 4. If you do not find any specific directory add the -f flag to go buster and rerun\
