@@ -8,7 +8,7 @@
 5. If you find some directory and stuck  make sure to run gobuster again with the new directory i.e http:\\$IP/newDirectory  
 6.
 
-#Possible web vulnerabilities
+# Possible web vulnerabilities
 ## LFI
 1. LocalFile Inclusion: We can log poision if linux based or try remote access control if Window
 2. Check links ending with ?file=index.php ?book=  (Possible vulnerabilities in source code)
@@ -25,10 +25,10 @@
 13. john -w=/usr/share/wordlists/rockyou.txt hash.txt
  
 
-##Login page
+## Login page
 1. Always check for default credentials
 2. SQL injection
 3. Burpite suite brute force, Hydra (use with caution can be locked out) 
 4. Searchsploit Any version info of the login page? ex: pfsense 2.3.2
 
-##XSS
+## XSS
