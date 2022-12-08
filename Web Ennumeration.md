@@ -12,7 +12,7 @@
 ## LFI
 1. LocalFile Inclusion: We can log poision if linux based or try remote access control if Window
 2. Check links ending with ?file=index.php ?book=  (Possible vulnerabilities in source code)
-3. book= ../../../../etc/passwd   (Hosting on **Window or apache )
+3. book= ../../../../etc/passwd   (Figure out if the server is hosting on **Window or apache )
 4. ../../../../var/www/html/index.php  html to confirm log poisoning 
 5. Add  ../ ../../../../ and check if the following following files exists.
 6. /etc/passwd\ /var/log/mail/USER\  /var/log/apache2/access.log\  /proc/self/environ\  /tmp/sess_ID\ /var/lib/php5/sess_ID\ /var/log/auth/log\  
