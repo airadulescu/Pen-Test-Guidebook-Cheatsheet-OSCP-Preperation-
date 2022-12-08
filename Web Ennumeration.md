@@ -9,13 +9,13 @@
 6.
 
 ##Possible web vulnerabilities
-1. LocalFile Inclusion 
+1. LocalFile Inclusion: We can log poision if linux based or try remote access control if Window
 2. Check links ending with ?file=index.php ?book=  (Possible vulnerabilities in source code)
-3. book= ../../../../etc/passwd   (Window or apache?)
+3. book= ../../../../etc/passwd   (Hosting on **Window or apache )
 4. ../../../../var/www/html/index.php  html to confirm log poisoning 
 5. Add  ../ ../../../../ and check if the following following files exists.
-6. /etc/passwd \ /var/log/mail/USER \  /var/log/apache2/access.log \  /proc/self/environ \  /tmp/sess_ID \ /var/lib/php5/sess_ID\ /var/log/auth/log\  
-7. /windows/system32/drivers/etc/hosts (for window host) \
+6. /etc/passwd\ /var/log/mail/USER\  /var/log/apache2/access.log\  /proc/self/environ\  /tmp/sess_ID\ /var/lib/php5/sess_ID\ /var/log/auth/log\  
+7. /windows/system32/drivers/etc/hosts (for **window host)\
 8. Now that we have confirmed LFI vulnerablity, lets log poision ../../../../var/log/apache2/access.log via invalid connection request.
 9. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
 10. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
