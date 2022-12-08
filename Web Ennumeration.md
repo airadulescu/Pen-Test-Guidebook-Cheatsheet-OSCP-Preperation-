@@ -14,16 +14,19 @@
 3. book= ../../../../etc/passwd   (Window or apache?)
 4. ../../../../var/www/html/index.php  html to confirm log poisoning 
 5. Add  ../ ../../../../ and check if the following following files exists.
-6. /etc/passwd  /var/log/mail/USER  /var/log/apache2/access.log  /proc/self/environ  /tmp/sess_ID /var/lib/php5/sess_ID /var/log/auth/log
-7. Now that we have confirmed LFI vulnerablity, lets log poision ../../../../var/log/apache2/access.log via invalid connection request.
-8. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
-9. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
-10. If you receive command execution, we will insert a reversshell via url encoding.
+6. /etc/passwd \ /var/log/mail/USER \  /var/log/apache2/access.log \  /proc/self/environ \  /tmp/sess_ID \ /var/lib/php5/sess_ID\ /var/log/auth/log\  
+7. /windows/system32/drivers/etc/hosts (for window host) \
+8. Now that we have confirmed LFI vulnerablity, lets log poision ../../../../var/log/apache2/access.log via invalid connection request.
+9. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
+10. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
+11. If you receive command execution, we will insert a reversshell via url encoding.
 
  
 
 ##Login page
 1. Always check for default credentials
 2. SQL injection
-3. Burpite suite brute force? 
-4. 
+3. Burpite suite brute force, Hydra (use with caution can be locked out) 
+4. Searchsploit Any version info of the login page? ex: pfsense 2.3.2
+
+##XSS
