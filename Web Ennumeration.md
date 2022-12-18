@@ -31,5 +31,12 @@
 2. SQL injection
 3. Burpite suite brute force, Hydra (use with caution can be locked out) 
 4. Searchsploit Any version info of the login page? ex: pfsense 2.3.2
+## Domain/Subdomain 
+1. When seeing a contact page, with emails, make note of them, check if they are using some special domain \
+2. change /etc/hosts and add the host name
+3. gobuster vhost --apend-domain -u http://$DomainName -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt \
 
 ## XSS
+
+## Getting a reverse shell
+1. https://www.revshells.com/
