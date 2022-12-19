@@ -39,5 +39,6 @@
 ## XSS
 
 ## Getting a stable reverse shell
+0. Check what language/ technology it is using ex: php, python, perl and possibly the version, to know which revershell to pick.
 1. https://www.revshells.com/
 2. Payloads. https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#python
