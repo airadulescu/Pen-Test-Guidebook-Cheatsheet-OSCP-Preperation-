@@ -38,5 +38,6 @@
 
 ## XSS
 
-## Getting a reverse shell
+## Getting a stable reverse shell
 1. https://www.revshells.com/
+2. Payloads. https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#python
