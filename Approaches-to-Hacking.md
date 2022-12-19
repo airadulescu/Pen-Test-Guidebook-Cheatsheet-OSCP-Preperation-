@@ -1,5 +1,4 @@
 ## Setting
-0.export ip\ 
 1.export ip=10.10.10.10\
 1.5 make directory for nmap result: mkdir nmap && cd nmap
 ## Ennumeration
