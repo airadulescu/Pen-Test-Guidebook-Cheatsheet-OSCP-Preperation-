@@ -34,7 +34,7 @@
 ## Domain/Subdomain 
 1. When seeing a contact page, with emails, make note of them, check if they are using some special domain \
 2. change /etc/hosts and add the host name
-3. gobuster vhost --apend-domain -u http://$DomainName -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt \
+3. gobuster vhost --append-domain -u http://$DomainName -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt \
 
 ## XSS
 
