@@ -5,3 +5,7 @@
 2. `nmap -p 25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY} $IP `
 3. `smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/xato-net-10-million-usernames-dup.txt  -t $IP`
 4. nc -nv $ip 25 (connect to smpt)\
+5. `VRFY root` Command to check if user exists.
+6. `EXPN root` Command to check if user is in a mailing list.
+## SMTP Open relay vulnerability, authentication bypass. 
+1. `nmap -p 25 --script smtp-open-relay $ip
