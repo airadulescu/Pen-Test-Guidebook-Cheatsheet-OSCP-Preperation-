@@ -1,5 +1,5 @@
 ## Simple Mail Transfer Protocol (Sending Mail To People)
-0. Why is SMTP important? User Ennumeration, bypass authentication, and send email. (User name could be used for ssh, telnet brute forcing)\
+0. Why is SMTP important? User Ennumeration, Bypass authentication, and Send email. (User name could be used for ssh, telnet brute forcing)\
 1.Port 25
 ## SMTP User Ennumeration
 2. `nmap -p 25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY} $IP `
@@ -8,4 +8,6 @@
 5. `VRFY root` Command to check if user exists.
 6. `EXPN root` Command to check if user is in a mailing list.
 ## SMTP Open relay vulnerability, authentication bypass. 
-1. `nmap -p 25 --script smtp-open-relay $ip
+1. `nmap -p 25 --script smtp-open-relay $ip`
+## Vulnerability Scanning && user Ennumeration all in one.
+1. 'nmap --script=smtp-commands,smtp-enum-users,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p 25 $ip'
