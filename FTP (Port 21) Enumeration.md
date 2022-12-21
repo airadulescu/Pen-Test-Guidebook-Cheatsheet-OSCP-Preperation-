@@ -1,4 +1,4 @@
-##ftp (File Transfer Protocol) 
+## Ftp (File Transfer Protocol) 
 We can leverage FTP to gain critical information(possibly credentials) for further exploits or upload a reverseshell.
 
 port <21> , commonly used on webserver to upload files/images
