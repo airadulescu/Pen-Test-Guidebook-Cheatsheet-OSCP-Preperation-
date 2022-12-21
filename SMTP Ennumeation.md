@@ -2,8 +2,8 @@
 0. Why is SMTP important? User Ennumeration, Bypass authentication, and Send email. (User name could be used for ssh, telnet brute forcing)\
 1.Port 25
 ## SMTP User Ennumeration
-2. `nmap -p 25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY} $IP `
-3. `smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/xato-net-10-million-usernames-dup.txt  -t $IP`
+2. `nmap -p 25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY} $IP ` (initial Ennumeration)
+3. `smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/xato-net-10-million-usernames-dup.txt  -t $IP` (secondary Ennumeration)
 4. `nc -nv $IP 25` (connect to smpt)
 5. `VRFY root` Command to check if user exists.
 6. `EXPN root` Command to check if user is in a mailing list.
