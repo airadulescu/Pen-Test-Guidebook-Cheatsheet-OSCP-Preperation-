@@ -11,7 +11,7 @@
 ## Getting a reverseshell(stable)
 
 ## Privilege Escalation
-0. Stabalize shell `python3 -c 'import pty; pty.spawn("/bin/bash")'` 
+0. Stabalize shell `python3 -c 'import pty; pty.spawn("/bin/bash")'`\
 1.Automated scan for vulnerabilities or manual ennumeration.\
 2.Create a directory and a a linEnum.sh file. Copy paste the content from https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh\
 3.Host a python server `python3 -m http.server 8080` to transfer the linEum.sh\
