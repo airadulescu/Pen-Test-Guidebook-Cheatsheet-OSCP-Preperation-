@@ -5,9 +5,9 @@ port <21> , commonly used on webserver to upload files/images
 `ftp://$IP` , You can visit the site to see the file. 
 
 
-1. Check for anonymous login. ID: anonymous Password:x  or password is annoymous
-2. Always check for version (possible for exploitation (searchsploit)
-3.Brtue force login with Hydra. hydra -L user.txt -P pass.txt $IP ftp. (use -l if user name is known)
+1. Check for anonymous login. `ID: anonymous Password:x  or password is annoymous`
+2. Always check for **version** (possible for exploitation (searchsploit)
+3.Brtue force login with Hydra. `hydra -L user.txt -P pass.txt $IP ftp`. (use -l if user name is known)
 
 
 ## Steps: 
@@ -19,7 +19,7 @@ port <21> , commonly used on webserver to upload files/images
 
 # Use binary to upload or download files\
 `binary`\
-`ascii`\
+`ascii`
 
 # quote PASV
 `ls-al`
