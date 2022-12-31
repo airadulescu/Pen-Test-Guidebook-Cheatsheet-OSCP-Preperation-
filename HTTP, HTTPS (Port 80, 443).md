@@ -8,6 +8,7 @@
 4. If you do not find any specific directory add the -f flag to go buster and rerun\
 5. If you find some directory and stuck  make sure to run gobuster again with the new directory i.e http:\\$IP/newDirectory  
 6. Searchsploit technologies for vulnerabiltieis `nmap -p 80,443  --script=*vuln* $IP`
+7. Try directory busting while logged in
 
 # Possible web vulnerabilities
 ## LFI
