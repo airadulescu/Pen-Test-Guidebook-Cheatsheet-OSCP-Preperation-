@@ -23,3 +23,5 @@ port <21> , commonly used on webserver to upload files/images
 
 # quote PASV
 `ls-al`
+# Download all Files from FTP
+`wget -m ftp://anonymous:anonymous@10.10.10.98`
