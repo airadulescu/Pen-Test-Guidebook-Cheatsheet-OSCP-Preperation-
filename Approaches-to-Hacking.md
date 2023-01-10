@@ -34,6 +34,10 @@
  ### Unquoted Service Path
  ### Writable Service Executable
  ### AlwaysInstallElevate
+ check if both values are 1.
+ 0.reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated\
+ 1.reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated\
+
  ### SeImpersonatePrivilege 
 
 ## File Transfer to Linux victim
