@@ -1,2 +1,2 @@
 # Zero-to-Hero-Pen-Testing-Notes-
-Notes learned from Hack the Box, Tryhackme and OSCP 
+Refer to the Full Guide. Personal Notes learned from Hack the Box, Tryhackme and OSCP 
