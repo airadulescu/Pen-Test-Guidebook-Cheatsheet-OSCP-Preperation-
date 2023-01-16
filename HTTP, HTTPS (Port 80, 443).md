@@ -1,7 +1,7 @@
 # Zero-to-Hero-Pen-Testing-Notes-
 
 1.Always maunally ennumerate and check the source code control+u/ Check `/robots.txt` `/sitemap.xml`\
-2.`gobuster dir -u http://$IP:PORT -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` -b (for bad servercode) -f (add this flag if gobuster is not returing any results for a long time) \
+2.`gobuster dir -u http://$IP:PORT -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -f` -b (for bad servercode) -f (add this flag if gobuster is not returing any results for a long time) \
 2.5 `wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --sc 200 http://$IP/FUZZ` \ 
 2.6. Check wappalayzer to check basic info of the page. \
 3. `nikto -h $IP`   , `dirb http://IP -r -z 10`
