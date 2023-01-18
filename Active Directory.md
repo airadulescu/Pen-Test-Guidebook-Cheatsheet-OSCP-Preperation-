@@ -6,8 +6,8 @@
 5. Enumerate Kerberos: If port 88 is open, use tools like krb5-enum-users or enum-users-gpp-decrypt to enumerate users and potentially crack Kerberos passwords.
 6. Enumerate RPC: If port 135 is open, use tools like rpcclient or nmap-rpc-info to gather information about the RPC service and potentially identify vulnerable endpoints.
 7. Check for group policy: (Groups.xml for Windows 12 and below) Look for group policy information in the directory, use tools like gpp-decrypt to decrypt and extract any saved credentials.
- - open the Groups.xml file. decrpyt the password hash by `gpp-decrypt $HASH`
-9.Check for computer accounts: Look for computer accounts in the directory, which can be used to identify and target specific systems on the network.
+   - open the Groups.xml file. decrpyt the password hash by `gpp-decrypt $HASH`
+9. Check for computer accounts: Look for computer accounts in the directory, which can be used to identify and target specific systems on the network.
 10. Look for organizational units (OUs): Check for OUs in the directory, which can be used to identify the structure and organization of the network.
 
 ## Enumeration
