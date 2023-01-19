@@ -26,3 +26,8 @@
 3. `smbmap -H $IP` (anonymous login) 
 4. `smbmap -R $Filename $IP` (list the content of the directroy)
 5. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
+6. 'crackmapexec smb -u '' -p'' $IP` or 'crackmapexec smb -u 'guest' -p''`
+
+## AS-REP Roasting (Authentication Reply Roasting)
+1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller, the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access.
+2. 
