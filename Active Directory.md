@@ -1,4 +1,4 @@
-# Getting Initial Foodhold (We need Credentials!! User names are gold :) )
+# Getting Initial Foodhold (We need Credentials!! User names are golden :) )
 1. Determine the IP address or hostname of the Active Directory server. If we seen( port 53 445, 389, 88, we are most likely dealing with AD)
 2. Enumerate DNS
 3. Check open ports: Enumerate SMB: If port 445 is open, use tools like enum4linux, smbmap, smbclient crackmapexec to gather information about the SMB service, such as shared folders and users.
