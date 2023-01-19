@@ -1,7 +1,7 @@
-# Getting Initial Foodhold (We need Credentials!!)
-1. Identify the target: Determine the IP address or hostname of the Active Directory server. If we seen( port 53 445, 389, 88, we are most likely dealing with AD)
+# Getting Initial Foodhold (We need Credentials!! User names are gold :) )
+1. Determine the IP address or hostname of the Active Directory server. If we seen( port 53 445, 389, 88, we are most likely dealing with AD)
 2. Enumerate DNS
-3. Check open ports: Enumerate SMB: If port 445 is open, use tools like enum4linux crackmapexec to gather information about the SMB service, such as shared folders and users.
+3. Check open ports: Enumerate SMB: If port 445 is open, use tools like enum4linux, smbmap, smbclient crackmapexec to gather information about the SMB service, such as shared folders and users.
 4. Enumerate LDAP: If port 389 or 3268/3269 is open, use tools like ldapsearch, to gather information about the LDAP directory service, such as users, groups, and organizational units.
 5. Enumerate Kerberos: If port 88 is open, use tools like krb5-enum-users or enum-users-gpp-decrypt to enumerate users and potentially crack Kerberos passwords.
 6. Enumerate RPC: If port 135 is open, use tools like rpcclient or nmap-rpc-info to gather information about the RPC service and potentially identify vulnerable endpoints.
