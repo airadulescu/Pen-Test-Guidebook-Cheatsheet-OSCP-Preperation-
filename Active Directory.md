@@ -27,7 +27,7 @@
 4. `smbmap -R $Filename $IP` (list the content of the directroy)
 5. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
 6. `crackmapexec smb $IP -u '' -p'' ` or `crackmapexec smb $IP -u 'guest' -p''` to try to access.
-## LDAP
+## Port 389, 636, 3268, 3269 LDAP 
 1. `nmap -n -sV --script "ldap* and not brute*" -p 389 $Ip` 
 2.  `ldapsearch -x 
 ## AS-REP Roasting (Authentication Reply Roasting)
