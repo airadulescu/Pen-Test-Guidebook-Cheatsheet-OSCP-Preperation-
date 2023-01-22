@@ -29,7 +29,7 @@
 5. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
 6. `crackmapexec smb $IP -u '' -p'' ` or `crackmapexec smb $IP -u 'guest' -p''` to try to access.
 ## Port 389, 636, 3268, 3269 LDAP 
-1. `nmap -n -sV --script "ldap* and not brute*" -p 389 $Ip` 
+1. `nmap -n -sV --script "ldap* and not brute*" -p- 389 $Ip` 
 2.  `ldapsearch -x 
 ```
 ldapsearch -x -h <IP> -s base namingcontexts
