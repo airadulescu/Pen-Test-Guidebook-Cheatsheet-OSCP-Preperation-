@@ -10,6 +10,7 @@
 9. Check for computer accounts: Look for computer accounts in the directory, which can be used to identify and target specific systems on the network.
 10. Look for organizational units (OUs): Check for OUs in the directory, which can be used to identify the structure and organization of the network.
 11. https://orange-cyberdefense.github.io/ocd-mindmaps/img/pentest_ad_dark_2022_11.svg  Look at this roadmap
+12. https://dw3113r.com/2022/07/20/active-directory-attack-cheat-sheet/ 
 
 ## Enumeration
 1. `nmap -sC -sV -p -oA result 10.0.0.0./8`
