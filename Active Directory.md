@@ -13,7 +13,7 @@
 12. https://dw3113r.com/2022/07/20/active-directory-attack-cheat-sheet/ 
 
 ## Enumeration
-1. `nmap -sC -sV -p -oA result 10.0.0.0./8`
+1. `nmap -sC -sV -p- -oA result 10.0.0.0./8`
 2. Edit host file `subl /etc/hosts to add domain`
 
 ## Port 53 DNS
