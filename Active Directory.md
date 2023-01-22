@@ -30,6 +30,14 @@
 ## Port 389, 636, 3268, 3269 LDAP 
 1. `nmap -n -sV --script "ldap* and not brute*" -p 389 $Ip` 
 2.  `ldapsearch -x 
+```
+ldapsearch -x -h <IP> -s base namingcontexts
+[Parse through the returned naming contexts, then enumerate each one]:
+ldapsearch -x -h <IP> -b ‘DC=EGOTISTICAL-BANK,DC=LOCAL’
+[You can further query specific sections of each naming context]:
+ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
+
+```
 ## AS-REP Roasting (Authentication Reply Roasting)
 1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
 2. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
