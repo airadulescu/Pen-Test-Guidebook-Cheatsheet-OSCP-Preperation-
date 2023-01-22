@@ -48,9 +48,11 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
    
    
 # After initial shell, credentials or some password (Enumeration)
-
-1. Things we want to know, domain admins, domain controller, domain policy
-2. Enumerate the initial target using powerview. Trasfer Powerview , and gather info to send back to bloodhound
+0. Logistic: Say we gain some creds from the above method and have a shell on the computer. Now what can we do?
+1. Check if, I can logon to other PC with same credentials(Pass the Pass) Dump the SAM file to figure out other accounts to move to other account,( Pass the Hash)
+2. Enumerate the PC that we are loged on to. Continue this process for lateral movement!
+3. Things we want to know, domain admins, domain controller, domain policy
+4. Enumerate the initial target using powerview. Trasfer Powerview , and gather info to send back to bloodhound
 ```
 Transfer SharHound (exe or ps1) and nc.exe to target
 Run SharpHound.exe or .ps1
