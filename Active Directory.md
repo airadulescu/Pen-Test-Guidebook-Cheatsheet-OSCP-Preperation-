@@ -100,7 +100,11 @@ Transfer loot back to kali:
 6. `lsadump::lsa /patch`
 
 ## Golden Ticket Attack
-1. 
+
+
+## GPP credentials 
+
+
 ## Token Impersonation
 0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
 
