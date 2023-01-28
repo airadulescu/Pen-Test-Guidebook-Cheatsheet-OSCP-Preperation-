@@ -46,7 +46,7 @@ ldapsearch -h <IP> -x -b “DC=cascade,DC=local” ‘(objectClass=person)’
 4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
 5. `impacket-GetNPUsers -usersfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
-   
+## Web vulnerabiltities   
    
 # After initial shell, credentials or some password (Enumeration)
 0. ***Logistic***: Say we gain some creds from the above method and have a shell on the computer. Now what can we do?
