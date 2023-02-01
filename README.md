@@ -5,14 +5,14 @@ A guidebook that can be followed from enumeration to post exploitation. The repo
 
 # Table of Contents
 1. [Enumeration](#Network Enumeration)
-2. [Example2](#example2)
+2. [Exploitation](#Local Exploits)
 3. [Third Example](#third-example)
 4. [Fourth Example](#fourth-examplehttpwwwfourthexampleco
   1. 
       Network Enumeration
 Service Enumeration
 Operating System Enumeration
-Exploitation
+
 Buffer Overflow
 Local Exploits
 Remote Exploits
