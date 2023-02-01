@@ -2,10 +2,10 @@
 A guidebook that can be followed from enumeration to post exploitation. The repository is a collection of useful commands and tips that I have learned for the Offensive Security Certified Professional (OSCP) exam. This was created during my senior year of university with a passion for information security. 
 
 ### Usage
-Please refer to the Full Guide.md file. For specific port enumerations and revershells look at the differnt port md files and revershell md file respectively
+Please refer to the Full Guide (Enumeration to Priv Escalation).md file. For specific port enumerations and revershells please refer to the differnt port md files and revershell md file respectively.
 
 ### Remarks
-This repository is a humble reflection of my passion for information security and my journey towards the OSCP exam. It serves as a quick reference for OSCP exam and contains a list of relevant commands, tips, and examples for each topic. The information listed on the repository contains information from various resources ranging from TCM security, Offensive security, Google and other github repositories.
+This repository is a humble reflection of my passion for information security and my journey towards the OSCP exam. I am not an expert and always open to suggestions, constructive criticizm for improvement and knowledge expansion. Moreover this repository serves as a quick reference for OSCP exam and contains a list of relevant commands, tips, and examples for each topic. The information listed on the repository contains various resources ranging from TCM security, Offensive Security, Google and other github repositories.
 
 ### Contributing
 This repository is open to contributions from the community. If you have something valuable to add, please submit a pull request. Your contributions will be much appreciated.
