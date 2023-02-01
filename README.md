@@ -1,33 +1,11 @@
 # Penetration Testing (OSCP  Guidebook/Cheatsheet Repository)
 A guidebook that can be followed from enumeration to post exploitation. The repository is a collection of useful commands and tips that I have learned for the Offensive Security Certified Professional (OSCP) exam. This was created during my senior year of university with a passion for information security. 
 
-## Table of Contents
-
-# Table of Contents
-1. [Enumeration](#Network Enumeration)
-2. [Exploitation](#Local Exploits)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexampleco
-  1. 
-      Network Enumeration
-Service Enumeration
-Operating System Enumeration
-
-Buffer Overflow
-Local Exploits
-Remote Exploits
-Privilege Escalation
-Linux Privilege Escalation
-Windows Privilege Escalation
-Post-Exploitation
-Maintaining Access
-Data Exfiltration
-## Tools
-Enumeration Tools
-Exploitation Tools
-Privilege Escalation Tools
 ## Usage
-This repository is a humble reflection of my passion for information security and my journey towards tge OSCP exam. It serves as a quick reference for OSCP exam and contains a list of relevant commands, tips, and examples for each topic.
+Please refer to the Full Guide.md file. For specific port enumerations and revershells look at the differnt port md files and revershell md file respectively
+
+## Remarks
+This repository is a humble reflection of my passion for information security and my journey towards the OSCP exam. It serves as a quick reference for OSCP exam and contains a list of relevant commands, tips, and examples for each topic. The information listed on the repository contains information from various resources ranging from TCM security, Offensive security, Google and other github repositories.
 
 ## Contributing
 This repository is open to contributions from the community. If you have something valuable to add, please submit a pull request. Your contributions will be much appreciated.
