@@ -57,3 +57,4 @@
 2. Sensetive Data exposure
 3. Command Injection. Try valid argument followed by `;` `&&` , '|' , '&'and shell commands like `whoami`
 4. LFI/RFI 
+5. File upload
