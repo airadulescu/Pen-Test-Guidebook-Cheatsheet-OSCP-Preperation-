@@ -55,3 +55,4 @@
 ## Top Ten OWASP.
 1. Broken authentication
 2. Sensetive Data exposure
+3  Command Injection. Try valid argument followed by `;` and commands like `etc/passwd`
