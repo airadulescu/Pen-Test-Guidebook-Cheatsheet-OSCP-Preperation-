@@ -1,7 +1,7 @@
-## Penetration Testing (OSCP  Guidebook/Cheatsheet Repository
+# Penetration Testing (OSCP  Guidebook/Cheatsheet Repository
 A guidebook that can be followed from enumeration to post exploitation. The repository is a collection of useful commands and tips that I have learned for the Offensive Security Certified Professional (OSCP) exam. This was created during my senior year of university with a passion for information security. 
 
-# Table of Contents
+## Table of Contents
   1. Enumeration
       Network Enumeration
 Service Enumeration
@@ -16,17 +16,17 @@ Windows Privilege Escalation
 Post-Exploitation
 Maintaining Access
 Data Exfiltration
-# Tools
+## Tools
 Enumeration Tools
 Exploitation Tools
 Privilege Escalation Tools
-# Usage
+## Usage
 This repository is a humble reflection of my passion for information security and my journey towards tge OSCP exam. It serves as a quick reference for OSCP exam and contains a list of relevant commands, tips, and examples for each topic.
 
-# Contributing
+## Contributing
 This repository is open to contributions from the community. If you have something valuable to add, please submit a pull request. Your contributions will be much appreciated.
 
-# Future Updates
+## Future Updates
 As I continue to learn and grow in the field of information security, I plan to update this repository to include relevant materials beyond the OSCP exam.
 
 # License
