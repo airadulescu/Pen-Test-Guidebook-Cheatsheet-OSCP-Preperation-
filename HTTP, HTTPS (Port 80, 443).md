@@ -52,5 +52,6 @@
 2. Payloads. https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#python
 
 
-## OWASP.
-1. Open web application security projects
+## Top Ten OWASP.
+1. Broken authentication
+2. Sensetive Data exposure
