@@ -17,3 +17,9 @@ if the user attempts to authenticate to a hostname that is not registered on the
 
 ## Kerberos Authentication
 1. Client sends authentication request
+
+
+
+## Misc
+how to rdesktop
+`rdesktop 192.168.143.10  -u offsec -p lab -r disk:<SHARE_NAME>=/path/to/share -r clipboard -g 1920x1080 -z -x m -P0`
