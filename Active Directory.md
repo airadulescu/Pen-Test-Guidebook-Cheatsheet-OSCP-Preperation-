@@ -35,8 +35,9 @@
 3.  `ldapsearch -x -b <search_base> -H <ldap_host>` 
 4.  `ldapsearch -x -b "dc=hutch,dc=offsec" -H ldap://192.168.55.122`    anonymous authentication
 5.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec"`   anonymous authentication
-6.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep sAMAccountName:`   Grabbing User
-7.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep description:`   Grabbing User
+6.  `ldapsearch -x -H ldap://<IP> -D '<DOMAIN>\<username>' -w '<password>' -b "DC=<1_SUBDOMAIN>,DC=<TLD>"` credential login
+7.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep sAMAccountName:`   Grabbing User
+8.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep description:`   Grabbing User
 
 
 ```
