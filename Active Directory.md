@@ -34,6 +34,10 @@
 2. `nmap -n -sV --script "ldap* and not brute" -Pn  192.168.55.122`
 3.  `ldapsearch -x -b <search_base> -H <ldap_host>` 
 4.  `ldapsearch -x -b "dc=hutch,dc=offsec" -H ldap://192.168.55.122`    anonymous authentication
+5.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec"`   anonymous authentication
+6.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep sAMAccountName:`   Grabbing User
+7.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep description:`   Grabbing User
+
 
 ```
 ldapsearch -x -h <IP> -s base namingcontexts
