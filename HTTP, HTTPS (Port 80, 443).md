@@ -4,7 +4,7 @@
 2.`gobuster dir -u http://$IP:PORT -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -f` -b (for bad servercode) -f (add this flag if gobuster is not returing any results for a long time) \
 2.5 `wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --sc 200 http://$IP/FUZZ`  and   `dirb http://IP -r -z 10`\ 
 2.6. Check wappalayzer to check basic info of the page. \
-3. `nikto -h $IP`   , (look out for WebDav, if we have creds) ->  `cadaver $IP`
+3. `nikto -h $IP`   , (look out for WebDav, if we have creds) ->  `cadaver $IP` and upload revershell `put evil.asp`\
 4. If you do not find any specific directory add the -f flag to go buster and rerun\
 5. If you find some directory and stuck  make sure to run gobuster again with the new directory i.e http:\\$IP/newDirectory  
 6. Searchsploit technologies for vulnerabiltieis `nmap -p 80,443  --script=*vuln* $IP`
