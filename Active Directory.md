@@ -24,10 +24,11 @@
 ## Port 445 SMB (Check SMB.md file)
 1. `nmap --script safe -p 445, $IP`
 2. `enum4linux $IP`
-3. `smbmap -H $IP` (anonymous login) 
-4. `smbmap -R $Filename $IP` (list the content of the directroy)
-5. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
-6. `crackmapexec smb $IP -u '' -p '' ` or `crackmapexec smb $IP -u 'guest' -p ''` to try to access.
+3. `smbclient --no-pass -L //<IP>` , `smbclient -U 'username[%passwd]' -L [--pw-nt-hash] //<IP>` , `smbclient --no-pass //<IP>/<Folder>`
+4. `smbmap -H $IP` (anonymous login) 
+5. `smbmap -R $Filename $IP` (list the content of the directroy)
+6. `smbmap -R Filename $IP -A $FiletoDownload -q` (Download the intersting file such as Groups.xml)  `update db` and `locate $Filename`. 
+7. `crackmapexec smb $IP -u '' -p '' ` or `crackmapexec smb $IP -u 'guest' -p ''` to try to access.
 ## Port 389, 636, 3268, 3269 LDAP 
 1. `nmap -n -sV --script "ldap* and not brute*" -p- 389 $Ip` 
 2.  `ldapsearch -x 
