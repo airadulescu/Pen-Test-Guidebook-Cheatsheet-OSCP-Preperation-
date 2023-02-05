@@ -48,7 +48,11 @@
 5. `impacket-GetNPUsers -usersfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
 ## Web vulnerabiltities   
-   
+
+
+## Getting users list
+1. `impacket-GetADUsers  -all -dc-ip 192.168.55.122 hutch.offsec/`  
+2. 
 # After initial shell, credentials or some password (Enumeration)
 0. ***Logistic***: Say we gain some creds from the above method and have a shell on the computer. Now what can we do?
 1. Check if, I can logon to other PC with same credentials(Pass the Pass crackmapexec) Dump the SAM file to figure out other accounts to move to other account,( Pass the Hash, secret.py)
