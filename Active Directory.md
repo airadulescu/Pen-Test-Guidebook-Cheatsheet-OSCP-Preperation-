@@ -39,7 +39,7 @@
 7.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep sAMAccountName:`   Grabbing User
 8.  `ldapsearch -x -H ldap://192.168.55.122 -D '' -w '' -b "DC=hutch,DC=offsec" | grep description:`   Grabbing User
 
-```
+
 ## AS-REP Roasting (Authentication Reply Roasting) (With valid users)
 1. If pre-authentication is disabled, and we provide a list of userlists to the domain controller (AS-REQ), the DC will grant us TGT. If the passwords are weak, we can crack the TGT and gain access. We can use krebrute, impacket, or crackmap
 2. If we dont find some misconfiguration or user name try using this username list `/usr/share/seclists/Usernames/xato-net-10-million-usernames.txt` 
