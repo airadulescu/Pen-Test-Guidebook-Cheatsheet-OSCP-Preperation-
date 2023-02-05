@@ -53,6 +53,7 @@
 ## Getting users list
 1. `impacket-GetADUsers  -all -dc-ip 192.168.55.122 hutch.offsec/`  
 2.  if we have credentials inclduing user name as password, supply it. to the above command
+3.  `impacket-GetADUser -all -dc-ip 192.168.219.122 hutch.offsec/SOMEID:SOMEPASSWORD`
 # After initial shell, credentials or some password (Enumeration)
 0. ***Logistic***: Say we gain some creds from the above method and have a shell on the computer. Now what can we do?
 1. Check if, I can logon to other PC with same credentials(Pass the Pass crackmapexec) Dump the SAM file to figure out other accounts to move to other account,( Pass the Hash, secret.py)
@@ -60,6 +61,7 @@
 3. Things we want to know, domain admins, domain controller, domain policy
 4. Enumerate the initial target using powerview. Trasfer Powerview , and gather info to send back to bloodhound
 5. `bloodhound-python  -d hutch.offsec -u fmcsorley -p CrabSharkJellyfish192 -c all -ns 192.168.55.122` 
+6. `neo4j console` `sudo bloodhound` and upload the files to see the shortest path to domain 
 ```
 Transfer SharHound (exe or ps1) and nc.exe to target
 Run SharpHound.exe or .ps1
