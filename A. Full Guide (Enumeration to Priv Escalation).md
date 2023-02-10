@@ -66,7 +66,8 @@
  0. `.\winPeas.exe quiet servicesinfo` Look for No quotes and Space detected in winpeas
  1. `Get-UnquotedService` (PowerUp) or `wmic service get name,pathname,displayname,startmode | findstr /i auto | findstr /i /v "C:\Windows\\" | findstr /i /v """`\ 
  2. `.\accesschk.exe /accepteula -uwcqv user <SERVICENAME>` check permission if we can restart the service.
- 3. Use accesschk.exe to check for write permissions in each binary path (if BUILTIN/user can write, we should write it in that path)
+ 3. ` .\accesschk.exe /accepteula` then: `.\accesschk.exe -ucqv [SERVICENAME]` if the above command does not work
+ 4. Use accesschk.exe to check for write permissions in each binary path (if BUILTIN/user can write, we should write it in that path)
   ``` 
   > .\accesschk.exe /accepteula -uwdq C:\
   > .\accesschk.exe /accepteula -uwdq "C:\Program Files\"
